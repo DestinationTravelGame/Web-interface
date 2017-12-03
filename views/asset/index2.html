@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form id="add_checkpoint">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">Checkpoint</h4>
+                  </div>
+                  <div class="modal-body">
+                     <div class="container">
+                        <ul class="nav nav-tabs">
+                           <li class="active"><a data-toggle="tab" href="#home">Chekpoints</a></li>
+                           <li><a data-toggle="tab" href="#menu1">Add Checkpoint</a></li>
+                           <li><a data-toggle="tab" href="#menu2">Menu 3</a></li>
+                        </ul>
+                        <div class="tab-content">
+                           <div id="home" class="tab-pane fade in active">
+                              <h3>Chekpoints</h3>
+                           </div>
+                           <div id="menu1" class="tab-pane fade">
+                              <div class="leftmap col-md-5">
+                                 <h4>Country / Страна / Երկիր</h4>
+                                 <div class="form-group">
+                                    <select name="" class="form-control" id="country">
+                                       <option disabled="disabled" selected="selected">Country</option>
+                                       <div id="country">
+                                          <option class="test3" value="Armenia">Armenia</option>
+                                       </div>
+                                    </select>
+                                    <script></script>
+                                 </div>
+                                 <h4>Region / Округ / Մարզ</h4>
+                                 <div class="form-group">
+                                    <select name="" class="form-control" id="regions">
+                                    </select>
+                                 </div>
+                                 <h4>City / Город / Քաղաք</h4>
+                                 <div class="form-group">
+                                    <select name="" class="form-control" id="cities">
+                                    </select>
+                                 </div>
+                                  <div class="countainer">
+                                  <div class="form-group">
+                                       <input type="number" placeholder="Marker Radius" id="marker_radius" name="marker_radius" class="form-control">
+                                    </div>
+                                  <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#arm_inputs">Arm</a></li>
+                                    <li><a data-toggle="tab" href="#rus_inputs">Rus</a></li>
+                                    <li><a data-toggle="tab" href="#eng_inputs">Eng</a></li>
+                                  </ul>
+
+                                  <div class="tab-content">
+                                    <div id="arm_inputs" class="tab-pane fade in active title_desc">
+
+                                        <div class="form-group">
+                                        <input class="form-control" type="text" id="arm_title" placeholder="Վերնագիր">
+                                        </div>
+                                        <div class="form-group">
+                                        <textarea name="" id="arm_desc" placeholder="Նկարագրություն" class="form-control" cols="30" rows="10"></textarea>
+                                      </div>
+                                    </div>
+                                    <div id="rus_inputs" class="tab-pane fade title_desc">
+                                        <div class="form-group">
+                                        <input class="form-control" type="text" id="rus_title" placeholder="Заголовок">
+                                        </div>
+                                        <div class="form-group">
+                                        <textarea name="" id="rus_desc" placeholder="Описание" class="form-control" cols="30" rows="10"></textarea>
+                                      </div>
+                                    </div>
+                                    <div id="eng_inputs" class="tab-pane fade title_desc">
+                                      <div class="form-group">
+                                        <input class="form-control" type="text" id="eng_title" placeholder="Title">
+                                      </div>
+                                      <div class="form-group">
+                                        <textarea name="" id="eng_desc" placeholder="Description" class="form-control" cols="30" rows="10"></textarea>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </div>
+
+                              </div>
+                              <div class="col-md-6 col-md-offset-1">
+                                 <h4 class="position">Check Place</h4>
+                                 <div id="map_canvas">
+                                 </div>
+                              </div>
+                              <div class="clearfix"></div>
+                              <h4>Types</h4>
+                              <div class="col-md-12 questions" id="">
+                                  <div class="controls span3">
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Mountain">Mountain</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Castle">Castle</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Farm">Farm</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Palace">Palace</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Temple">Temple</label>
+                                </div>
+                                <div class="controls span3">
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Sculpture">Sculpture</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Historical_event">Historical event</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Museum">Museum</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="River">River</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Lake">Lake</label>
+
+                                </div>
+                                <div class="controls span3">
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Concert_hall">Concert hall</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Sport_complex">Sport complex</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Cinema">Cinema</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Theater">Theater</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Opera">Opera</label>
+
+                                </div>
+                                <div class="controls span3">
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="checkboxes" value="Protective service charge">Concert hall</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="checkboxes" value="Redelivery Fee">Sport complex</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="checkboxes" value="Resdential delivery">Cinema</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="checkboxes" value="Residential pickup">Theater</label>
+                                  <label class="checkbox">
+                                      <input type="checkbox" name="checkboxes" value="Temp Controlled">Opera</label>
+
+                                </div>
+                                <div class="clearfix"></div>
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="container-fluid foot_part">
+                                 <div class="col-md-3">
+                                    <h4>Score</h4>
+                                    <div class="form-group">
+                                       <input type="number" id="score" name="score" class="form-control">
+                                    </div>
+                                    <h4>Marker URL</h4>
+                                    <div class="form-group">
+                                       <input type="text" id="marker_url" name="marker_url" class="form-control">
+                                    </div>
+                                    <h4>Difficulty Level</h4>
+                                    <div class="form-group">
+                                       <select name="difficult_val" class="form-control" id="difficulty">
+                                          <option value="1">easy</option>
+                                          <option value="2">normal</option>
+                                          <option value="3">hard</option>
+                                          <option value="4">extrame</option>
+                                       </select>
+                                    </div>
+                                 </div>
+                                 <div class="col-md- col-md-offset-3">
+
+                                    <div class="ques">
+
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="menu2" class="tab-pane fade">
+                              <h3>Menu 2</h3>
+                              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                           </div>
+                           <div id="menu3" class="tab-pane fade">
+                              <h3>Menu 3</h3>
+                              <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="modal-footer">
+                     <input type="reset" class="btn btn-default" value="Reset">
+                     <button type="button" id="send_data" class="btn btn-default">Success</button>
+                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                  </form>
+</body>
+</html>
