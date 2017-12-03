@@ -169,8 +169,25 @@ $('.city_select').on('change', function () {
 		})
 
 
+
+
 	})  // End File Selection
 
+
+	// Listen for file selection
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      $('.diff_origin_photo_viewer img').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#diff_origin_photo").change(function() {
+  readURL(this);
+});
 
 
 var task = [];
@@ -213,20 +230,20 @@ $("#send_data").click(function(){
 
     // Inserting to firebase DB
     firebaseRef.child(idPath).set(JsonToFirebase);
-
- //    firebaseRef.child(idPath + "/location").set(fields.location_array);
- //    firebaseRef.child(idPath + "/checkpoints_type").set(fields.type);
- //    firebaseRef.child(idPath + "/scores").child("score_type_1").set(fields.score);
- //    firebaseRef.child(idPath + '/marker_url').set(fields.marker_url);
- //    firebaseRef.child(idPath + '/marker_radius').set(marker_radius);
- //    firebaseRef.child(idPath + '/difficulty').set(fields.difficulty);
- //    firebaseRef.child(idPath + '/numphotos').set(numPhotos);
- //    firebaseRef.child(idPath + "/title/arm_title").set(fields.arm_title);
- //    firebaseRef.child(idPath + "/title/rus_title").set(fields.rus_title);
- //    firebaseRef.child(idPath + "/title/eng_title").set(fields.eng_title);
- //    firebaseRef.child(idPath + "/description/arm_desc").set(fields.arm_desc);
- //    firebaseRef.child(idPath + "/description/rus_desc").set(fields.rus_desc);
- //    firebaseRef.child(idPath + "/description/eng_desc").set(fields.eng_desc);
+    //
+    // firebaseRef.child(idPath + "/location").set(fields.location_array);
+    // firebaseRef.child(idPath + "/checkpoints_type").set(fields.type);
+    // firebaseRef.child(idPath + "/scores").child("score_type_1").set(fields.score);
+    // firebaseRef.child(idPath + '/marker_url').set(fields.marker_url);
+    // firebaseRef.child(idPath + '/marker_radius').set(marker_radius);
+    // firebaseRef.child(idPath + '/difficulty').set(fields.difficulty);
+    // firebaseRef.child(idPath + '/numphotos').set(numPhotos);
+    // firebaseRef.child(idPath + "/title/arm_title").set(fields.arm_title);
+    // firebaseRef.child(idPath + "/title/rus_title").set(fields.rus_title);
+    // firebaseRef.child(idPath + "/title/eng_title").set(fields.eng_title);
+    // firebaseRef.child(idPath + "/description/arm_desc").set(fields.arm_desc);
+    // firebaseRef.child(idPath + "/description/rus_desc").set(fields.rus_desc);
+    // firebaseRef.child(idPath + "/description/eng_desc").set(fields.eng_desc);
 
 	// Put Images To Storage
 	var storageRef = [];
@@ -272,7 +289,7 @@ $(".questions_table").on("change", function(){
 			var temporary_desc = temporary_checkpoint_object.description.eng_desc;
 			temporary_desc = temporary_desc.substring(0, 185) + " ...";
 			var head_pic_name = temporary_checkpoint_object.head_pic_name;
-			$("#quest").append("<div class='col-md-3 col-sm-6 col-sm-offset-0 point_row_in' style='padding:10px;'><div class='point_row'><p class='image_block'><img src='"+head_pic_name+"' alt='image.jpg' onerror='this.remove(this);' /></p><h3>"+temporary_title+"</h3><p class='description_block'>" + temporary_desc + "</p><p class='tool_block'><input class='btn btn-default table_button' value='Add Question' type='button' data-toggle='modal' data-target='#myModal4' data-id='"+checkpointIdss[i]+"''></p></div></div>");
+			$("#quest").append("<div class='col-md-3 col-sm-6 col-sm-offset-0 point_row_in' style='padding:10px;'><div class='point_row'><p class='image_block'><img src='"+head_pic_name+"' alt='image.jpg' onerror='this.remove(this);' /></p><h3>"+temporary_title+"</h3><p class='description_block'>" + temporary_desc + "</p><p class='tool_block'><input class='btn btn-default table_button add_question' value='Add Question' type='button' data-toggle='modal' data-target='#myModal4' data-id='"+checkpointIdss[i]+"''></p></div></div>");
 		}
 	})
 })

@@ -12,7 +12,11 @@
 
       <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="jsLibs/jquery-ui-1.9.2.custom.min.js"></script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">
+      <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js" integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
    </head>
    <body>
+     <script type="text/javascript">
 
+     </script>

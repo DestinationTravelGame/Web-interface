@@ -121,10 +121,6 @@ $("#save_data_1").on("click", function(){
   type_1_answer_id = 0;
 }) // End question typr 1
 
-
-
-
-
 // Question type 2
 $("#save_data_2").on("click", function(){
   if(type_2_answer_id < 2){
@@ -243,3 +239,45 @@ $("div.answer_group_type_2 > div").remove();
   document.getElementById("question_form").reset();
   type_2_answer_id = 0;
 })
+
+
+// Type 3
+
+$('.diff_origin_photo_add_photo').on('click', function(e){
+  var testButton = document.getElementById('diff_origin_photo');
+    var posX = $( "#draggable" ).offset().left - $( "#draggable" ).parent().offset().left + $( "#draggable" ).width()/2;
+    var posY = $( "#draggable" ).offset().top - $( "#draggable" ).parent().offset().top + $( "#draggable" ).height()/2;
+    var posXtoPercent = posX/$( "#draggable" ).parent().width()*100;
+    var posYtoPercent = posY/$( "#draggable" ).parent().width()*100;
+    var QuestionId = 'sel_diff&'+firebase.database().ref().push().key;
+    var ring_radius = (($( "#draggable" ).width()/2)/$( "#draggable" ).parent().width())*100;
+    var checkpointRef = child("checkpoints/"+$('#country2').val().slice(0,3).toLowerCase()+'/'+$('#regions2').val().slice(0,3).toLowerCase()+"/"+$('#cities2').val().slice(0,3).toLowerCase()+'/'+$('#get_current_checkpoint_id').val());
+    var questionPhoto = testButton.files[0];
+    var json = {
+      "change_point" : {
+        "ring_radius" : ring_radius,
+        "x" : posXtoPercent,
+        "y" : posYtoPercent,
+      },
+    }
+    firebaseRef = firebaseRef.child("questions/sel_diff/"+QuestionId);
+    firebaseRef.set(json);
+    storageRef = firebase.storage().ref('questions/sel_diff/'+QuestionId);
+    storageRef.put(questionPhoto);
+    checkpointRef.set('questions/'+QuestionId);
+})
+
+
+$( function() {
+  $( "#draggable" ).css('height',$( "#draggable" ).width())
+   $( "#draggable" ).draggable({
+     containment: "parent"
+   });
+ } );
+ $(document).ready(function(){
+   var dargWidth = $( "#draggable" ).width();
+   $( "#draggable" ).css('height',$( "#draggable" ).parent().width() * dargWidth / 100+'px');
+    $(document).on('click','.add_question', function(){
+      $('#get_current_checkpoint_id').val($(this).data('id'));
+    })
+ })

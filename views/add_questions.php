@@ -187,7 +187,27 @@
 							</div>
 					</div>
 					<div class="quest-type-3 quest-types">
-							my type 3
+
+						<div class="parent diff_origin_photo_viewer" style="width:500px;border:1px solid red;position:relative;left: 400px;">
+							<div id="draggable" style="position:absolute;border-radius:50%;width:15%;border:2px solid red;">
+								<span style="display:block;display: inline;
+    margin: 35% auto;
+    width: 43%;
+    display: block;
+    text-align: center;
+    font-size: 15px;
+    color: #383434;
+    font-weight: normal;" class="glyphicon glyphicon-plus"></span>
+							</div>
+							<img src="" alt=""  style="width:100%;">
+						</div>
+						<div class="col-md-3">
+								<label for="diff_origin_photo">
+									<i class="glyphicon glyphicon-plus"></i>
+								</label>
+								<input type="file" style="display:none" id="diff_origin_photo" name="" value="">
+						</div>
+						<button type="button" class="diff_origin_photo_add_photo">Upload</button>
 					</div>
 					<div class="quest-type-4 quest-types">
 							my type 4
@@ -262,5 +282,5 @@
 
   </div>
 </div>
-
+<input type="hidden" id='get_current_checkpoint_id'>
 <?php require 'layouts/footer.php' ?>
