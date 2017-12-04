@@ -251,7 +251,7 @@ $('.diff_origin_photo_add_photo').on('click', function(e){
     var posYtoPercent = posY/$( "#draggable" ).parent().width()*100;
     var QuestionId = 'sel_diff&'+firebase.database().ref().push().key;
     var ring_radius = (($( "#draggable" ).width()/2)/$( "#draggable" ).parent().width())*100;
-    var checkpointRef = child("checkpoints/"+$('#country2').val().slice(0,3).toLowerCase()+'/'+$('#regions2').val().slice(0,3).toLowerCase()+"/"+$('#cities2').val().slice(0,3).toLowerCase()+'/'+$('#get_current_checkpoint_id').val());
+    var checkpointRef = firebaseRef.child("checkpoints/"+$('#country2').val().slice(0,3).toLowerCase()+'/'+$('#regions2').val().slice(0,3).toLowerCase()+"/"+$('#cities2').val().slice(0,3).toLowerCase()+'/'+$('#get_current_checkpoint_id').val());
     var questionPhoto = testButton.files[0];
     var json = {
       "change_point" : {
@@ -264,7 +264,7 @@ $('.diff_origin_photo_add_photo').on('click', function(e){
     firebaseRef.set(json);
     storageRef = firebase.storage().ref('questions/sel_diff/'+QuestionId);
     storageRef.put(questionPhoto);
-    checkpointRef.set('questions/'+QuestionId);
+    checkpointRef.child('questions').push().set(QuestionId);
 })
 
 
