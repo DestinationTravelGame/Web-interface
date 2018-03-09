@@ -382,7 +382,7 @@ function get_checkpoints(map){
 }
 
 $(document).on("click", ".add_checkpoint_for_mission", function(checkpoint_number = 0){
-			var checkpoint_number = 0;
+
 			$(".mission_group").append("<input type='button' value='value'>")
 			// type_2_answer_id ++;
 	})
