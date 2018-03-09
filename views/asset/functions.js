@@ -332,7 +332,6 @@ function get_checkpoints(map){
 	ref.on("value", function(snapshot){
 			var allCheckpoints = snapshot.val();
 			var checkpointIds = Object.getOwnPropertyNames(allCheckpoints);
-			console.log(checkpointIds);
 			var num_checkpoints = checkpointIds.length;
 			for(i = 0; i <= num_checkpoints-1; i++) {
 					var checkpointName=checkpointIds[i];
@@ -342,10 +341,10 @@ function get_checkpoints(map){
 						checkpointRef = checkpointRef.child(checkpoint_id_array[j]);
 					}
 					checkpointRef = checkpointRef.child(checkpointName);
-					checkpointRef.on("value", function(snapshot){
+					checkpointRef.on("value", function(snapshot, i){
 						var currentCheckpointInfo = snapshot.val();
 
-						console.log(currentCheckpointInfo.location[0]);
+						console.log(checkpointIds[i]);
 						var uluru = {lat:currentCheckpointInfo.location[0], lng: currentCheckpointInfo.location[1]};
 
 						var contentString = currentCheckpointInfo.title.eng_title;
@@ -359,17 +358,18 @@ function get_checkpoints(map){
 		          position: uluru,
 		          map: map,
 		          title: 'Uluru (Ayers Rock)',
-
+							id: snapshot.key,
 		        });
-
+						google.maps.event.addListener(marker, 'click', function() {
+						    alert(this.id);
+						});
 		        marker.addListener('click', function() {
 							closeAllInfoWindows();
 		          infowindow.open(map, marker);
 							infoWindows.push(infowindow);
 		        });
 
-
-					})
+					});
 				// 	temporary_checkpoint_object = allCheckpointsInCity[checkpointName];
 				// 	var temporary_title = temporary_checkpoint_object.title.eng_title;
 				// 	var temporary_desc = temporary_checkpoint_object.description.eng_desc;
@@ -380,3 +380,18 @@ function get_checkpoints(map){
 		  })
 
 }
+
+$(document).on("click", ".add_checkpoint_for_mission", function(checkpoint_number = 0){
+			var checkpoint_number = 0;
+			$(".mission_group").append("<input type='button' value='value'>")
+			// type_2_answer_id ++;
+	})
+$(document).on("click", ".remove_checkpoint_for_mission", function(){
+	alert('removed');
+		// if (type_2_answer_id > 0) {
+		// 	$(".answer_group_type_2 #answer_group_"+(type_2_answer_id-1)).remove();
+		// 	type_2_answer_id --;
+		// }else{
+		// 	alert("Here are no answer for delete!");
+		// }
+})

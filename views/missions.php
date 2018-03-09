@@ -28,7 +28,14 @@
 
 <div id="missions">
   <div class="col-md-6">
+    <div class="form-group">
+      <input type="button" class='form-control add_checkpoint_for_mission' value='Add Checkpoint' data-button="1" name="button">
+      <br>
+      <input type="button" class='form-control remove_checkpoint_for_mission' value='Remove Checkpoint' data-button="1" name="button">
+    </div>
+    <div class="mission_group">
 
+    </div>
   </div>
   <div class="col-md-6">
     <div id="map_for_missions" style="width: 100%;height:500px"></div>

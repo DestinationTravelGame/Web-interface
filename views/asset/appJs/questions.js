@@ -3,11 +3,8 @@ var type_2_answer_id = 0;
   $(".add_answer_1_2").on("click", function(){
     if($(this).data("button") == "2"){
       var answers_id_2 = "type_2_answer_id_" + type_2_answer_id;
-      console.log(answers_id_2);
-      console.log(type_2_answer_id);
       $(".answer_group_type_2").append("<div id='answer_group_"+type_2_answer_id+"'><label for='true_2_" + type_2_answer_id + "'>Answer " + (type_2_answer_id + 1) + "<input type='checkbox' id='true_2_" + type_2_answer_id + "' value='" + answers_id_2 + "' name='type_2'><span></span></label><input name='type_2' type='text' class='form-control arm_answer_2' placeholder='Arm answer'><input type='text' placeholder='Rus answer' class='form-control rus_answer_2'><input name='type_2' type='text' class='form-control eng_answer_2' placeholder='Eng answer' ></div>")
       type_2_answer_id ++;
-      console.log(type_2_answer_id);
     }
     if($(this).data("button") == "1"){
       var answers_id_1 = "type_1_answer_id_" + type_1_answer_id;
