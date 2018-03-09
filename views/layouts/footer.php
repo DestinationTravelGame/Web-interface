@@ -60,6 +60,23 @@ if (document.getElementById('map') != null) {
 
 }
 })
+
+
+// Map for missions
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map_for_missions'), {
+    zoom: 8,
+    center: {lat: 40.202033, lng: 44.518471}
+  })
+  google.maps.event.addListener(map, 'click', function() {
+    closeAllInfoWindows();
+  });
+  get_checkpoints(map);
+}
+
+initMap();
+
+
 </script>
 
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -67,21 +84,20 @@ if (document.getElementById('map') != null) {
       <script src="../web-interface/views/asset/js/bootstrap.min.js"></script>
 
 <script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBY9EFiVrxbNRbZdNxQB2F4rzPuIuVlH_I",
-    authDomain: "store-491ea.firebaseapp.com",
-    databaseURL: "https://store-491ea.firebaseio.com",
-    projectId: "store-491ea",
-    storageBucket: "store-491ea.appspot.com",
-    messagingSenderId: "718046674824"
-  };
-
-  firebase.initializeApp(config);
+  // // Initialize Firebase
+  // var config = {
+  //   apiKey: "AIzaSyBY9EFiVrxbNRbZdNxQB2F4rzPuIuVlH_I",
+  //   authDomain: "store-491ea.firebaseapp.com",
+  //   databaseURL: "https://store-491ea.firebaseio.com",
+  //   projectId: "store-491ea",
+  //   storageBucket: "store-491ea.appspot.com",
+  //   messagingSenderId: "718046674824"
+  // };
+  //
+  // firebase.initializeApp(config);
 </script>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.js"></script>
-      <script src="../web-interface/views/asset/functions.js"></script>
       <script src="../web-interface/views/asset/script.js"></script>
       <script src="../web-interface/views/asset/script2.js"></script>
       <script src="../web-interface/views/asset/update.js"></script>

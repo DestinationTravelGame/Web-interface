@@ -26,5 +26,19 @@
     </div>
 </div>
 
+<div id="missions">
+  <div class="col-md-6">
 
+  </div>
+  <div class="col-md-6">
+    <div id="map_for_missions" style="width: 100%;height:500px"></div>
+  </div>
+
+
+
+
+
+</div>
+<script type="text/javascript">
+</script>
 <?php require 'layouts/footer.php' ?>

@@ -33,9 +33,6 @@
               <div class="container-fluid" style="paddin-top:20px;">
 
 
-
-
-
       <div class="leftmap col-md-6" style="padding-left:0;">
          <h4>Country / Страна / Երկիր</h4>
          <div class="form-group">

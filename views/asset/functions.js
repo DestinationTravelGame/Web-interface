@@ -1,4 +1,16 @@
+// Initialize Firebase
+var config = {
+	apiKey: "AIzaSyBY9EFiVrxbNRbZdNxQB2F4rzPuIuVlH_I",
+	authDomain: "store-491ea.firebaseapp.com",
+	databaseURL: "https://store-491ea.firebaseio.com",
+	projectId: "store-491ea",
+	storageBucket: "store-491ea.appspot.com",
+	messagingSenderId: "718046674824"
+};
 
+var infoWindows = [];
+
+firebase.initializeApp(config);
 // focus marker onChange location
 function findMyLocation(choosedLocation,type) {
 	if(type==1) {
@@ -197,9 +209,6 @@ function remove_checkpoint(d){
 
 
 
-
-
-
 // Choose Checkpoint's main photo
 function set_head_photo(d){
 	country = $("#country2").val().toLowerCase().slice(0,3);
@@ -220,7 +229,7 @@ function getValues(){
     });
 
   	var positions = myMarker.getPosition();
-		var id_part = positions.lat().toString().replace(".",",") + "_" + positions.lng().toString().replace(".",",");
+		var id_part = positions.lat().toString().replace(".",",") + "" + positions.lng().toString().replace(".",",");
 
 		// Make Object
     var fields = {
@@ -309,4 +318,65 @@ function validate(fields){
 		});
 		stopPropagation();
 	}
+}
+
+function closeAllInfoWindows() {
+	for (var i=0;i<infoWindows.length;i++) {
+		 infoWindows[i].close();
+	}
+}
+
+function get_checkpoints(map){
+	var firebaseRef = firebase.database().ref();
+	var ref = firebaseRef.child("checkpoints_id");
+	ref.on("value", function(snapshot){
+			var allCheckpoints = snapshot.val();
+			var checkpointIds = Object.getOwnPropertyNames(allCheckpoints);
+			console.log(checkpointIds);
+			var num_checkpoints = checkpointIds.length;
+			for(i = 0; i <= num_checkpoints-1; i++) {
+					var checkpointName=checkpointIds[i];
+					var checkpoint_id_array = checkpointName.split('_');
+					var checkpointRef = firebaseRef.child("checkpoints");
+					for(let j = 0; j < checkpoint_id_array.length - 2; j++){
+						checkpointRef = checkpointRef.child(checkpoint_id_array[j]);
+					}
+					checkpointRef = checkpointRef.child(checkpointName);
+					checkpointRef.on("value", function(snapshot){
+						var currentCheckpointInfo = snapshot.val();
+
+						console.log(currentCheckpointInfo.location[0]);
+						var uluru = {lat:currentCheckpointInfo.location[0], lng: currentCheckpointInfo.location[1]};
+
+						var contentString = currentCheckpointInfo.title.eng_title;
+
+						var infowindow = new google.maps.InfoWindow({
+		          content: contentString,
+		          maxWidth: 200
+		        });
+
+		        var marker = new google.maps.Marker({
+		          position: uluru,
+		          map: map,
+		          title: 'Uluru (Ayers Rock)',
+
+		        });
+
+		        marker.addListener('click', function() {
+							closeAllInfoWindows();
+		          infowindow.open(map, marker);
+							infoWindows.push(infowindow);
+		        });
+
+
+					})
+				// 	temporary_checkpoint_object = allCheckpointsInCity[checkpointName];
+				// 	var temporary_title = temporary_checkpoint_object.title.eng_title;
+				// 	var temporary_desc = temporary_checkpoint_object.description.eng_desc;
+
+			}
+
+
+		  })
+
 }

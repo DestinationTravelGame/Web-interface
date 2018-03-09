@@ -29,33 +29,7 @@
 	</div>
     <div class="form-group">
 
-
-
-<!--           <div class="form-group col-md-4 ">
-							<h4>Country / Страна / Երկիր</h4>
-              <select name="" class="form-control" id="country2">
-                 	<option selected="selected" value="defval">Country</option>
-                	<option class="test3" value="Armenia">Armenia</option>
-              </select>
-              <script></script>
-           </div>
-
-          <div class="form-group col-md-4">
-						<h4>Region / Округ / Մարզ</h4>
-            <select name="" class="form-control" id="regions2">
-							<option selected="selected" value="defval">Region</option>
-            </select>
-          </div>
-
-         <div class="form-group col-md-4">
-					 <h4>City / Город / Քաղաք</h4>
-					 <select name="" class="form-control questions_table" id="cities2">
-						 <option selected="selected" value="defval">City</option>
-					 </select>
-         </div> -->
-
-
-                     <p></p>
+             <p></p>
             <div class="form-group col-md-4">
               <h4>Country / Страна / Երկիր</h4>
                <select name="" class="form-control country_select" id="country2">
@@ -77,10 +51,6 @@
                 <option selected="selected" value="defval">City</option>
                </select>
             </div>
-
-
-
-
   	 </div>
 <div id="quest"></div>
 </div>
