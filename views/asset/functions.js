@@ -360,13 +360,15 @@ function get_checkpoints(map){
 		          title: 'Uluru (Ayers Rock)',
 							id: snapshot.key,
 		        });
-						google.maps.event.addListener(marker, 'click', function() {
-						    alert(selected_checkpoint);
-						});
+						// google.maps.event.addListener(marker, 'click', function() {
+						//     //alert(selected_checkpoint);
+						// });
 		        marker.addListener('click', function() {
 							closeAllInfoWindows();
 		          infowindow.open(map, marker);
 							infoWindows.push(infowindow);
+							mission_checkpoints_final[selected_checkpoint-1]=this.id;
+							alert(mission_checkpoints_final);
 		        });
 
 					});
@@ -381,12 +383,14 @@ function get_checkpoints(map){
 
 }
 var num_checkpoints_in_mission=0;
+var mission_checkpoints_final=[];
+
 $(document).on("click", ".add_checkpoint_for_mission", function(checkpoint_number = 0){
 			if (num_checkpoints_in_mission == 0) {
 				$('.remove_checkpoint_for_mission').removeAttr('disabled');
 			}
+			mission_checkpoints_final.push(NaN);
 			num_checkpoints_in_mission++;
-			console.log(num_checkpoints_in_mission);
 			var current_checkpoint_name="<div><input type='button' data-mission='' value=Checkpoint"+num_checkpoints_in_mission+" class='current_checkpoint_select' id='checkpoint_"+num_checkpoints_in_mission+"'></div>";
 			$(".mission_group").append(current_checkpoint_name);
 
@@ -395,7 +399,7 @@ $(document).on("click", ".remove_checkpoint_for_mission", function(){
 		 if (num_checkpoints_in_mission > 0) {
 	       $(".mission_group #checkpoint_"+num_checkpoints_in_mission).remove();
 				//$('#attached_docs [value=123]').remove();
-
+				mission_checkpoints_final.pop();
 		 		num_checkpoints_in_mission -- ;
 				if(num_checkpoints_in_mission == 0){
 					$('.remove_checkpoint_for_mission').attr('disabled', 'disabled');
@@ -403,7 +407,6 @@ $(document).on("click", ".remove_checkpoint_for_mission", function(){
 			}
 })
 var selected_checkpoint = 0;
-alert(selected_checkpoint);
 $(document).on('click','.current_checkpoint_select', function(){
 	selected_checkpoint = $(this).attr('id').split('_')[1];
 	alert(selected_checkpoint);
