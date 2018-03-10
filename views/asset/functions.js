@@ -380,18 +380,24 @@ function get_checkpoints(map){
 		  })
 
 }
-
+var num_checkpoints_in_mission=0;
 $(document).on("click", ".add_checkpoint_for_mission", function(checkpoint_number = 0){
+			num_checkpoints_in_mission++;
+			console.log(num_checkpoints_in_mission);
+			var current_checkpoint_name="<input type='button' value=Checkpoint"+num_checkpoints_in_mission+">";
+			$(".mission_group").append(current_checkpoint_name);
 
-			$(".mission_group").append("<input type='button' value='value'>")
-			// type_2_answer_id ++;
 	})
 $(document).on("click", ".remove_checkpoint_for_mission", function(){
-	alert('removed');
-		// if (type_2_answer_id > 0) {
-		// 	$(".answer_group_type_2 #answer_group_"+(type_2_answer_id-1)).remove();
-		// 	type_2_answer_id --;
-		// }else{
-		// 	alert("Here are no answer for delete!");
-		// }
+	//alert('removed');
+		 if (num_checkpoints_in_mission > 0) {
+			 var last_checkpoint_name="Checkpoint"+num_checkpoints_in_mission;
+		 		$(".mission_group [value=last_checkpoint_name]").remove();
+
+				//$('#attached_docs [value=123]').remove();
+
+		 		type_2_answer_id --;
+		 }else{
+			 	alert("Here are no answer for delete!");
+		 }
 })
