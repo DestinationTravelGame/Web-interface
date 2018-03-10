@@ -344,7 +344,6 @@ function get_checkpoints(map){
 					checkpointRef.on("value", function(snapshot, i){
 						var currentCheckpointInfo = snapshot.val();
 
-						console.log(checkpointIds[i]);
 						var uluru = {lat:currentCheckpointInfo.location[0], lng: currentCheckpointInfo.location[1]};
 
 						var contentString = currentCheckpointInfo.title.eng_title;
@@ -357,7 +356,7 @@ function get_checkpoints(map){
 		        var marker = new google.maps.Marker({
 		          position: uluru,
 		          map: map,
-		          title: 'Uluru (Ayers Rock)',
+		          content: contentString,
 							id: snapshot.key,
 		        });
 						// google.maps.event.addListener(marker, 'click', function() {
@@ -368,7 +367,7 @@ function get_checkpoints(map){
 		          infowindow.open(map, marker);
 							infoWindows.push(infowindow);
 							mission_checkpoints_final[selected_checkpoint-1]=this.id;
-							alert(mission_checkpoints_final);
+							$('#checkpoint_title_'+selected_checkpoint).val(this.content);
 		        });
 
 					});
@@ -391,13 +390,13 @@ $(document).on("click", ".add_checkpoint_for_mission", function(checkpoint_numbe
 			}
 			mission_checkpoints_final.push(NaN);
 			num_checkpoints_in_mission++;
-			var current_checkpoint_name="<div><input type='button' data-mission='' value=Checkpoint"+num_checkpoints_in_mission+" class='current_checkpoint_select' id='checkpoint_"+num_checkpoints_in_mission+"'></div>";
+			var current_checkpoint_name="<div id='checkpoint_group_"+num_checkpoints_in_mission+"'><div class='col-md-6'><input type='button' data-mission='' value=Checkpoint"+num_checkpoints_in_mission+" class='form-control current_checkpoint_select' id='checkpoint_"+num_checkpoints_in_mission+"'></div><div class='col-md-6'><input type='text' id='checkpoint_title_"+num_checkpoints_in_mission+"' readonly class='form-control'></div><div class='clearfix'></div></div>";
 			$(".mission_group").append(current_checkpoint_name);
 
 	})
 $(document).on("click", ".remove_checkpoint_for_mission", function(){
 		 if (num_checkpoints_in_mission > 0) {
-	       $(".mission_group #checkpoint_"+num_checkpoints_in_mission).remove();
+	       $(".mission_group #checkpoint_group_"+num_checkpoints_in_mission).remove();
 				//$('#attached_docs [value=123]').remove();
 				mission_checkpoints_final.pop();
 		 		num_checkpoints_in_mission -- ;
@@ -409,5 +408,50 @@ $(document).on("click", ".remove_checkpoint_for_mission", function(){
 var selected_checkpoint = 0;
 $(document).on('click','.current_checkpoint_select', function(){
 	selected_checkpoint = $(this).attr('id').split('_')[1];
-	alert(selected_checkpoint);
+})
+
+// $('.mission_group > div input[type="button"]').focusout(function(){
+// 	alert('sadasda');
+// 	selected_checkpoint = 0;
+// })
+
+$(document).on('click','#save_mission', function(){
+	alert(mission_checkpoints_final);
+	for(i = 0; i < mission_checkpoints_final.length; i++){
+		if(mission_checkpoints_final[i] == NaN){
+			alert('nshel bolor@');
+			return false;
+		}
+	}
+	var mission_point_type = [];
+	$.each($(".mission_types input[name='point_type']:checked"), function(){
+			mission_point_type.push($(this).val());
+	});
+
+	var JsonToFirebase = {
+		  checkpoints: mission_checkpoints_final,
+			duration: $("#mission_time").val(),
+			difficulty: Number($("#difficulty_missions").val()),
+			title: {
+				arm_title: $("#arm_title_mission").val(),
+				rus_title: $("#rus_title_mission").val(),
+				eng_title: $("#eng_title_mission").val(),
+			},
+			description: {
+				arm_desc: $("#arm_desc_mission").val(),
+				rus_desc: $("#rus_desc_mission").val(),
+				eng_desc: $("#eng_desc_mission").val(),
+			},
+	}
+
+var mission_id = mission_checkpoints_final[0] +'%'+ $.now();
+
+	var countryRef = mission_checkpoints_final[0].split('_')
+	var ref = firebaseRef.child('missions');
+	for(i = 0; i < countryRef.length - 2; i++){
+		ref = ref.child(countryRef[i])
+	}
+	ref.child(mission_id).set(JsonToFirebase);
+	firebaseRef.child('missions_id').child(mission_id).set(0);
+
 })

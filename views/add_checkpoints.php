@@ -57,7 +57,7 @@
 
 
 
-                      <div class="countainer">
+                  <div class="countainer">
 
                       <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#arm_inputs">Arm</a></li>

@@ -201,7 +201,24 @@ h4{
 	width: 25%;
 	margin:0 auto;
 }
+.span3_mission{
+	width: 45%;
+		float: left;
+		margin:0 auto;
+}
+.mission_group > div{
+	margin: 7px 0;
 
+}
+.mission_group > div input[type='text']:focus{
+	border-color: #ccc;
+}
+.mission_group > div input[type='text']{
+	cursor: default;
+}
+.mission_group > div input[type='button']{
+	cursor: pointer;
+}
 @media screen and (max-width:571px){
 	.questions {
 		padding: 20px 10px;
