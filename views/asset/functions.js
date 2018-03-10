@@ -361,7 +361,7 @@ function get_checkpoints(map){
 							id: snapshot.key,
 		        });
 						google.maps.event.addListener(marker, 'click', function() {
-						    alert(this.id);
+						    alert(selected_checkpoint);
 						});
 		        marker.addListener('click', function() {
 							closeAllInfoWindows();
@@ -382,22 +382,29 @@ function get_checkpoints(map){
 }
 var num_checkpoints_in_mission=0;
 $(document).on("click", ".add_checkpoint_for_mission", function(checkpoint_number = 0){
+			if (num_checkpoints_in_mission == 0) {
+				$('.remove_checkpoint_for_mission').removeAttr('disabled');
+			}
 			num_checkpoints_in_mission++;
 			console.log(num_checkpoints_in_mission);
-			var current_checkpoint_name="<input type='button' value=Checkpoint"+num_checkpoints_in_mission+">";
+			var current_checkpoint_name="<div><input type='button' data-mission='' value=Checkpoint"+num_checkpoints_in_mission+" class='current_checkpoint_select' id='checkpoint_"+num_checkpoints_in_mission+"'></div>";
 			$(".mission_group").append(current_checkpoint_name);
 
 	})
 $(document).on("click", ".remove_checkpoint_for_mission", function(){
-	//alert('removed');
 		 if (num_checkpoints_in_mission > 0) {
-			 var last_checkpoint_name="Checkpoint"+num_checkpoints_in_mission;
-		 		$(".mission_group [value=last_checkpoint_name]").remove();
-
+	       $(".mission_group #checkpoint_"+num_checkpoints_in_mission).remove();
 				//$('#attached_docs [value=123]').remove();
 
-		 		type_2_answer_id --;
-		 }else{
-			 	alert("Here are no answer for delete!");
-		 }
+		 		num_checkpoints_in_mission -- ;
+				if(num_checkpoints_in_mission == 0){
+					$('.remove_checkpoint_for_mission').attr('disabled', 'disabled');
+				}
+			}
+})
+var selected_checkpoint = 0;
+alert(selected_checkpoint);
+$(document).on('click','.current_checkpoint_select', function(){
+	selected_checkpoint = $(this).attr('id').split('_')[1];
+	alert(selected_checkpoint);
 })
