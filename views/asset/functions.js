@@ -331,10 +331,15 @@ function get_checkpoints(map){
 	var ref = firebaseRef.child("checkpoints_id");
 	ref.on("value", function(snapshot){
 			var allCheckpoints = snapshot.val();
+			console.log("this is what the snapshot is");
+			console.log(allCheckpoints);
 			var checkpointIds = Object.getOwnPropertyNames(allCheckpoints);
 			var num_checkpoints = checkpointIds.length;
 			for(i = 0; i <= num_checkpoints-1; i++) {
 					var checkpointName=checkpointIds[i];
+					console.log("this is checkpoint name");
+					console.log(checkpointName
+					console.log(i);
 					var checkpoint_id_array = checkpointName.split('_');
 					var checkpointRef = firebaseRef.child("checkpoints");
 					for(let j = 0; j < checkpoint_id_array.length - 2; j++){
