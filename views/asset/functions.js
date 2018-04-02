@@ -338,7 +338,7 @@ function get_checkpoints(map){
 			for(i = 0; i <= num_checkpoints-1; i++) {
 					var checkpointName=checkpointIds[i];
 					console.log("this is checkpoint name");
-					console.log(checkpointName
+					console.log(checkpointName);
 					console.log(i);
 					var checkpoint_id_array = checkpointName.split('_');
 					var checkpointRef = firebaseRef.child("checkpoints");
