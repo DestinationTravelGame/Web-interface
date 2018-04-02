@@ -162,7 +162,7 @@ $("#fileButton").on("click", function(){
 
 			var myid = "myimg"+i;
 			$("#upload_file #upload_pics").append("<div class='col-xs-6 col-md-3'><a class='thumbnail'><img src='' id="+myid+" alt='uploading'></a></div>")
-			document.getElementById(myid).src = URL.createObjectURL(event.target.files[i]);
+			document.getElementById(myid).src = URL.createObjectURL(e.target.files[i]);
 
 			uploader[i] = document.getElementById(uploaderID);
 		}
