@@ -1,392 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-      <title></title>
-      <!-- Bootstrap -->
-      <link href="css/bootstrap.min.css" rel="stylesheet">
-      <link rel="stylesheet" href="style.css">
-      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-      <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-      
-      <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-   </head>
-   <body>
-      <div class="container">
-         <!-- Trigger the modal with a button -->
-         <!-- Modal -->
-         <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-               <!-- Modal content-->
-               <div class="modal-content">
-                 <form id="add_checkpoint">
-                  <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                     <h4 class="modal-title">Checkpoint</h4>
-                  </div>
-                  <div class="modal-body">
-                     <div class="container">
-                        <ul class="nav nav-tabs">
-                           <li class="active"><a data-toggle="tab" href="#home">Chekpoints</a></li>
-                           <li><a data-toggle="tab" href="#menu1">Add Checkpoint</a></li>
-                           <li><a data-toggle="tab" href="#menu2">Menu 3</a></li>
-                        </ul>
-                        <div class="tab-content">
-                           <div id="home" class="tab-pane fade in active">
-                              <h3>Chekpoints</h3>
-                           </div>
-                           <div id="menu1" class="tab-pane fade">
-                              <div class="leftmap col-md-5">
-                                 <h4>Country / Страна / Երկիր</h4>
-                                 <div class="form-group">
-                                    <select name="" class="form-control" id="country">
-                                       <option disabled="disabled" selected="selected">Country</option>
-                                       <div id="country">
-                                          <option class="test3" value="Armenia">Armenia</option>
-                                       </div>
-                                    </select>
-                                    <script></script>
-                                 </div>
-                                 <h4>Region / Округ / Մարզ</h4>
-                                 <div class="form-group">
-                                    <select name="" class="form-control" id="regions">
-                                    </select>
-                                 </div>
-                                 <h4>City / Город / Քաղաք</h4>
-                                 <div class="form-group">
-                                    <select name="" class="form-control" id="cities">
-                                    </select>
-                                 </div>
-                                  <div class="countainer">
-                                  <div class="form-group">
-                                       <input type="number" placeholder="Marker Radius" id="marker_radius" name="marker_radius" class="form-control">
-                                    </div>
-                                  <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#arm_inputs">Arm</a></li>
-                                    <li><a data-toggle="tab" href="#rus_inputs">Rus</a></li>
-                                    <li><a data-toggle="tab" href="#eng_inputs">Eng</a></li>
-                                  </ul>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title></title>
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
-                                  <div class="tab-content">
-                                    <div id="arm_inputs" class="tab-pane fade in active title_desc">
-                                      
-                                        <div class="form-group">
-                                        <input class="form-control" type="text" id="arm_title" placeholder="Վերնագիր">
-                                        </div>
-                                        <div class="form-group">
-                                        <textarea name="" id="arm_desc" placeholder="Նկարագրություն" class="form-control" cols="30" rows="10"></textarea>
-                                      </div>
-                                    </div>
-                                    <div id="rus_inputs" class="tab-pane fade title_desc">
-                                        <div class="form-group">
-                                        <input class="form-control" type="text" id="rus_title" placeholder="Заголовок">
-                                        </div>
-                                        <div class="form-group">
-                                        <textarea name="" id="rus_desc" placeholder="Описание" class="form-control" cols="30" rows="10"></textarea>
-                                      </div>
-                                    </div>
-                                    <div id="eng_inputs" class="tab-pane fade title_desc">
-                                      <div class="form-group">
-                                        <input class="form-control" type="text" id="eng_title" placeholder="Title">
-                                      </div>
-                                      <div class="form-group">
-                                        <textarea name="" id="eng_desc" placeholder="Description" class="form-control" cols="30" rows="10"></textarea>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  </div>
-                                 
-                              </div>
-                              <div class="col-md-6 col-md-offset-1">
-                                 <h4 class="position">Check Place</h4>
-                                 <div id="map_canvas">
-                                 </div>
-                              </div>
-                              <div class="clearfix"></div>
-                              <h4>Types</h4>
-                              <div class="col-md-12 questions" id="">
-                                  <div class="controls span3">
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="Mountain">Mountain</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="Castle">Castle</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="Farm">Farm</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="Palace">Palace</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="Temple">Temple</label>               
-                                </div>
-                                <div class="controls span3">
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="Sculpture">Sculpture</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="Historical_event">Historical event</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="Museum">Museum</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="River">River</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="Lake">Lake</label>
-                                  
-                                </div>
-                                <div class="controls span3">
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="Concert_hall">Concert hall</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="Sport_complex">Sport complex</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="Cinema">Cinema</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="Theater">Theater</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="point_type" value="Opera">Opera</label>
-                                  
-                                </div>
-                                <div class="controls span3">
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="checkboxes" value="Protective service charge">Concert hall</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="checkboxes" value="Redelivery Fee">Sport complex</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="checkboxes" value="Resdential delivery">Cinema</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="checkboxes" value="Residential pickup">Theater</label>
-                                  <label class="checkbox">
-                                      <input type="checkbox" name="checkboxes" value="Temp Controlled">Opera</label>
-                                  
-                                </div>
-                                <div class="clearfix"></div>
-                              </div>
-                              <div class="clearfix"></div>
-                              <div class="container-fluid foot_part">
-                                 <div class="col-md-3">
-                                    <h4>Score</h4>
-                                    <div class="form-group">
-                                       <input type="number" id="score" name="score" class="form-control">
-                                    </div>
-                                    <h4>Marker URL</h4>
-                                    <div class="form-group">
-                                       <input type="text" id="marker_url" name="marker_url" class="form-control">
-                                    </div>
-                                    <h4>Difficulty Level</h4>
-                                    <div class="form-group">
-                                       <select name="difficult_val" class="form-control" id="difficulty">
-                                          <option value="1">easy</option>
-                                          <option value="2">normal</option>
-                                          <option value="3">hard</option>
-                                          <option value="4">extrame</option>
-                                       </select>
-                                    </div>
-                                 </div>
-                                 <div class="col-md- col-md-offset-3">
-                          
-                                    <div class="ques">
-                                    
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div id="menu2" class="tab-pane fade">
-                              <h3>Menu 2</h3>
-                              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-                           </div>
-                           <div id="menu3" class="tab-pane fade">
-                              <h3>Menu 3</h3>
-                              <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="clearfix"></div>
-                  <div class="modal-footer">
-                     <input type="reset" class="btn btn-default" value="Reset">
-                     <button type="button" id="send_data" class="btn btn-default">Success</button>
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                  </form>
-               </div>
+  <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <form id="add_checkpoint">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Checkpoint</h4>
             </div>
-         </div>
-      </div>
-      
-      <div class="container">
-         <!-- Trigger the modal with a button -->
-         <!-- Modal -->
-         <div class="modal fade" id="myModa2" role="dialog">
-            <div class="modal-dialog">
-               <!-- Modal content-->
-               <div class="modal-content question-modal">
-                  <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                     <h4 class="modal-title">Add Question</h4>
+            <div class="modal-body">
+              <div class="container">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a data-toggle="tab" href="#home">Chekpoints</a></li>
+                  <li><a data-toggle="tab" href="#menu1">Add Checkpoint</a></li>
+                  <li><a data-toggle="tab" href="#menu2">Menu 3</a></li>
+                </ul>
+                <div class="tab-content">
+                  <div id="home" class="tab-pane fade in active">
+                    <h3>Chekpoints</h3>
                   </div>
-                  <div class="container">
-                    <h2>Modal Example</h2>
-                    <!-- Trigger the modal with a button -->
-                    
+                  <div id="menu1" class="tab-pane fade">
+                    <div class="leftmap col-md-5">
+                      <h4>Country / Страна / Երկիր</h4>
+                      <div class="form-group">
+                        <select name="" class="form-control" id="country">
+                          <option disabled="disabled" selected="selected">Country</option>
+                          <div id="country">
+                            <option class="test3" value="Armenia">Armenia</option>
+                          </div>
+                        </select>
+                        <script></script>
+                      </div>
+                      <h4>Region / Округ / Մարզ</h4>
+                      <div class="form-group">
+                        <select name="" class="form-control" id="regions">
+                        </select>
+                      </div>
+                      <h4>City / Город / Քաղաք</h4>
+                      <div class="form-group">
+                        <select name="" class="form-control" id="cities">
+                        </select>
+                      </div>
+                      <div class="countainer">
+                        <div class="form-group">
+                          <input type="number" placeholder="Marker Radius" id="marker_radius" name="marker_radius" class="form-control">
+                        </div>
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a data-toggle="tab" href="#arm_inputs">Arm</a></li>
+                          <li><a data-toggle="tab" href="#rus_inputs">Rus</a></li>
+                          <li><a data-toggle="tab" href="#eng_inputs">Eng</a></li>
+                        </ul>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="add_question" role="dialog">
-                      <div class="modal-dialog">
-                      
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Modal Header</h4>
+                        <div class="tab-content">
+                          <div id="arm_inputs" class="tab-pane fade in active title_desc">
+
+                            <div class="form-group">
+                              <input class="form-control" type="text" id="arm_title" placeholder="Վերնագիր">
+                            </div>
+                            <div class="form-group">
+                              <textarea name="" id="arm_desc" placeholder="Նկարագրություն" class="form-control" cols="30" rows="10"></textarea>
+                            </div>
                           </div>
-                          <div class="modal-body">
-                                    <div class="modal-body ">
-                                     <select name="" class="form-control" id="quesion_type">
-                                         <option selected='selected' disabled>Choose Question Type</option>
-                                         <option value="1">Multiple choice - 1 correct answers</option>
-                                         <option value="2">Multiple choice - many correct answers</option>
-                                         <option value="3">Find the difference from original photo</option>
-                                         <option value="3">Is the photo original</option>
-                                     </select>
-                                     <div class="container-fluid question-type">
-                                         <form class="type_1">
-                                            <div class="form-group col-md-4">
-                                             <textarea class='form-control' name="" id="" cols="30" rows="10"></textarea>
-                                             </div>
-                                             <div class="form-group col-md-8">
-                                                
-                                                 <div class="col-md-12"><input type="text" class="form-control" placeholder='Answer 1'><input type="radio"></div>
-                                                 <div class="col-md-12"><input type="text" class="form-control" placeholder='Answer 2'><input type="radio"></div>
-                                                 <div class="col-md-12"><input type="text" class="form-control" placeholder='Answer 3'><input type="radio"></div>
-                                                 <div class="col-md-12"><input type="text" class="form-control" placeholder='Answer 4'><input type="radio"></div>
-                                             </div>
-                                         </form>
-                                         <form class="type_2">
-                                             <input type="button">
-                                         </form>
-                                         <form class="type_3">
-                                             <input type="file">
-                                         </form>
-                                     </div>
-                                  </div>
+                          <div id="rus_inputs" class="tab-pane fade title_desc">
+                            <div class="form-group">
+                              <input class="form-control" type="text" id="rus_title" placeholder="Заголовок">
+                            </div>
+                            <div class="form-group">
+                              <textarea name="" id="rus_desc" placeholder="Описание" class="form-control" cols="30" rows="10"></textarea>
+                            </div>
                           </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <div id="eng_inputs" class="tab-pane fade title_desc">
+                            <div class="form-group">
+                              <input class="form-control" type="text" id="eng_title" placeholder="Title">
+                            </div>
+                            <div class="form-group">
+                              <textarea name="" id="eng_desc" placeholder="Description" class="form-control" cols="30" rows="10"></textarea>
+                            </div>
                           </div>
                         </div>
-                        
+                      </div>
+
+                    </div>
+                    <div class="col-md-6 col-md-offset-1">
+                      <h4 class="position">Check Place</h4>
+                      <div id="map_canvas">
                       </div>
                     </div>
-                    
-                  </div>
-                  <div class="form-group">
-                    <h4>Country / Страна / Երկիր</h4>
-                                 <div class="form-group ">
-                                    <select name="" class="form-control" id="country2">
-                                       <option disabled="disabled" selected="selected">Country</option>
-                                       <div id="country">
-                                          <option class="test3" value="Armenia">Armenia</option>
-                                       </div>
-                                    </select>
-                                    <script></script>
-                                 </div>
-                                 <h4>Region / Округ / Մարզ</h4>
-                                 <div class="form-group">
-                                    <select name="" class="form-control" id="regions2">
-                                    </select>
-                                 </div>
-                                 <h4>City / Город / Քաղաք</h4>
-                                 <div class="form-group">
-                                    <select name="" class="form-control" id="cities2">
-                                    </select>
-                                 </div>
-                  </div>
-                  <table class="table table-bordered" id="get_all_checkpoints">
-                    <thead>
-                    <tr>
-                      <th>N</th>
-                      <th>Title</th>
-                      <th>Description</th>
-                      <th><button type="button" class="btn btn-info btn-lg add_question" data-toggle="modal" data-id="" data-target="#add_question" id="eee">+</button></th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                    <div class="clearfix"></div>
+                    <h4>Types</h4>
+                    <div class="col-md-12 questions" id="">
+                      <div class="controls span3">
+                        <label class="checkbox">
+                          <input type="checkbox" name="point_type" value="Mountain">Mountain</label>
+                          <label class="checkbox">
+                            <input type="checkbox" name="point_type" value="Castle">Castle</label>
+                            <label class="checkbox">
+                              <input type="checkbox" name="point_type" value="Farm">Farm</label>
+                              <label class="checkbox">
+                                <input type="checkbox" name="point_type" value="Palace">Palace</label>
+                                <label class="checkbox">
+                                  <input type="checkbox" name="point_type" value="Temple">Temple</label>
+                                </div>
+                                <div class="controls span3">
+                                  <label class="checkbox">
+                                    <input type="checkbox" name="point_type" value="Sculpture">Sculpture</label>
+                                    <label class="checkbox">
+                                      <input type="checkbox" name="point_type" value="Historical_event">Historical event</label>
+                                      <label class="checkbox">
+                                        <input type="checkbox" name="point_type" value="Museum">Museum</label>
+                                        <label class="checkbox">
+                                          <input type="checkbox" name="point_type" value="River">River</label>
+                                          <label class="checkbox">
+                                            <input type="checkbox" name="point_type" value="Lake">Lake</label>
 
-                    </tbody>
-                  </table>
+                                          </div>
+                                          <div class="controls span3">
+                                            <label class="checkbox">
+                                              <input type="checkbox" name="point_type" value="Concert_hall">Concert hall</label>
+                                              <label class="checkbox">
+                                                <input type="checkbox" name="point_type" value="Sport_complex">Sport complex</label>
+                                                <label class="checkbox">
+                                                  <input type="checkbox" name="point_type" value="Cinema">Cinema</label>
+                                                  <label class="checkbox">
+                                                    <input type="checkbox" name="point_type" value="Theater">Theater</label>
+                                                    <label class="checkbox">
+                                                      <input type="checkbox" name="point_type" value="Opera">Opera</label>
 
-                  <div class="modal-footer">
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="main_wrapper">
-         <div class="buttons">
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Checkpoints</button>
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModa2">Questions</button>
-         </div>
-      </div>
-      
-      
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="js/bootstrap.min.js"></script>
-      
-      
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB45uCs9ukCMUL8Usi2r0i3rVigL73UJ3Q&callback=initMap"></script>
-<script>
-    
-    function initMap() {
-        
+                                                    </div>
+                                                    <div class="controls span3">
+                                                      <label class="checkbox">
+                                                        <input type="checkbox" name="checkboxes" value="Protective service charge">Concert hall</label>
+                                                        <label class="checkbox">
+                                                          <input type="checkbox" name="checkboxes" value="Redelivery Fee">Sport complex</label>
+                                                          <label class="checkbox">
+                                                            <input type="checkbox" name="checkboxes" value="Resdential delivery">Cinema</label>
+                                                            <label class="checkbox">
+                                                              <input type="checkbox" name="checkboxes" value="Residential pickup">Theater</label>
+                                                              <label class="checkbox">
+                                                                <input type="checkbox" name="checkboxes" value="Temp Controlled">Opera</label>
 
-          
-           var uluru = {lat: 40.202033, lng: 44.518471};
-           var map = new google.maps.Map(document.getElementById('map_canvas'), {
-             zoom: 8,
-             center: uluru
-           });
-           myMarker = new google.maps.Marker({
-             position: uluru,
-             map: map,
-             draggable:true,
-           });
-            
-           /*google.maps.event.addListener(myMarker, 'dragend', function(evt){
-         document.getElementById('map_canvas').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
-         });*/
-           $(document).ready(function() {
-    google.maps.event.addListener(map, "idle", function(){
-        google.maps.event.trigger(map, 'resize'); 
-    });
-}); 
+                                                              </div>
+                                                              <div class="clearfix"></div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <div class="container-fluid foot_part">
+                                                              <div class="col-md-3">
+                                                                <h4>Score</h4>
+                                                                <div class="form-group">
+                                                                  <input type="number" id="score" name="score" class="form-control">
+                                                                </div>
+                                                                <h4>Marker URL</h4>
+                                                                <div class="form-group">
+                                                                  <input type="text" id="marker_url" name="marker_url" class="form-control">
+                                                                </div>
+                                                                <h4>Difficulty Level</h4>
+                                                                <div class="form-group">
+                                                                  <select name="difficult_val" class="form-control" id="difficulty">
+                                                                    <option value="1">easy</option>
+                                                                    <option value="2">normal</option>
+                                                                    <option value="3">hard</option>
+                                                                    <option value="4">extrame</option>
+                                                                  </select>
+                                                                </div>
+                                                              </div>
+                                                              <div class="col-md- col-md-offset-3">
 
-         }
-</script>
+                                                                <div class="ques">
+
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                          <div id="menu2" class="tab-pane fade">
+                                                            <h3>Menu 2</h3>
+                                                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                                                          </div>
+                                                          <div id="menu3" class="tab-pane fade">
+                                                            <h3>Menu 3</h3>
+                                                            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="modal-footer">
+                                                      <input type="reset" class="btn btn-default" value="Reset">
+                                                      <button type="button" id="send_data" class="btn btn-default">Success</button>
+                                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                  </form>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          <div class="container">
+                                            <!-- Trigger the modal with a button -->
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="myModa2" role="dialog">
+                                              <div class="modal-dialog">
+                                                <!-- Modal content-->
+                                                <div class="modal-content question-modal">
+                                                  <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Add Question</h4>
+                                                  </div>
+                                                  <div class="container">
+                                                    <h2>Modal Example</h2>
+                                                    <!-- Trigger the modal with a button -->
 
 
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBY9EFiVrxbNRbZdNxQB2F4rzPuIuVlH_I",
-    authDomain: "store-491ea.firebaseapp.com",
-    databaseURL: "https://store-491ea.firebaseio.com",
-    projectId: "store-491ea",
-    storageBucket: "store-491ea.appspot.com",
-    messagingSenderId: "718046674824"
-  };
-  firebase.initializeApp(config);
-</script>
-      <script src="script.js"></script>
-   </body>
-</html>
-<!--
-<select name="" id="">
-  <option value="lori 1"> lori 1</option>
-</select>-->
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="add_question" role="dialog">
+                                                      <div class="modal-dialog">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                          <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h4 class="modal-title">Modal Header</h4>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                            <div class="modal-body ">
+                                                              <select name="" class="form-control" id="quesion_type">
+                                                                <option selected='selected' disabled>Choose Question Type</option>
+                                                                <option value="1">Multiple choice - 1 correct answers</option>
+                                                                <option value="2">Multiple choice - many correct answers</option>
+                                                                <option value="3">Find the difference from original photo</option>
+                                                                <option value="3">Is the photo original</option>
+                                                              </select>
+                                                              <div class="container-fluid question-type">
+                                                                <form class="type_1">
+                                                                  <div class="form-group col-md-4">
+                                                                    <textarea class='form-control' name="" id="" cols="30" rows="10"></textarea>
+                                                                  </div>
+                                                                  <div class="form-group col-md-8">
+
+                                                                    <div class="col-md-12"><input type="text" class="form-control" placeholder='Answer 1'><input type="radio"></div>
+                                                                    <div class="col-md-12"><input type="text" class="form-control" placeholder='Answer 2'><input type="radio"></div>
+                                                                    <div class="col-md-12"><input type="text" class="form-control" placeholder='Answer 3'><input type="radio"></div>
+                                                                    <div class="col-md-12"><input type="text" class="form-control" placeholder='Answer 4'><input type="radio"></div>
+                                                                  </div>
+                                                                </form>
+                                                                <form class="type_2">
+                                                                  <input type="button">
+                                                                </form>
+                                                                <form class="type_3">
+                                                                  <input type="file">
+                                                                </form>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                          </div>
+                                                        </div>
+
+                                                      </div>
+                                                    </div>
+
+                                                  </div>
+                                                  <div class="form-group">
+                                                    <h4>Country / Страна / Երկիր</h4>
+                                                    <div class="form-group ">
+                                                      <select name="" class="form-control" id="country2">
+                                                        <option disabled="disabled" selected="selected">Country</option>
+                                                        <div id="country">
+                                                          <option class="test3" value="Armenia">Armenia</option>
+                                                        </div>
+                                                      </select>
+                                                      <script></script>
+                                                    </div>
+                                                    <h4>Region / Округ / Մարզ</h4>
+                                                    <div class="form-group">
+                                                      <select name="" class="form-control" id="regions2">
+                                                      </select>
+                                                    </div>
+                                                    <h4>City / Город / Քաղաք</h4>
+                                                    <div class="form-group">
+                                                      <select name="" class="form-control" id="cities2">
+                                                      </select>
+                                                    </div>
+                                                  </div>
+                                                  <table class="table table-bordered" id="get_all_checkpoints">
+                                                    <thead>
+                                                      <tr>
+                                                        <th>N</th>
+                                                        <th>Title</th>
+                                                        <th>Description</th>
+                                                        <th><button type="button" class="btn btn-info btn-lg add_question" data-toggle="modal" data-id="" data-target="#add_question" id="eee">+</button></th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                  </table>
+
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="main_wrapper">
+                                            <div class="buttons">
+                                              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Checkpoints</button>
+                                              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModa2">Questions</button>
+                                            </div>
+                                          </div>
+
+                                          <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+                                          <!-- Include all compiled plugins (below), or include individual files as needed -->
+                                          <script src="js/bootstrap.min.js"></script>
+                                                                                    
+                                          <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB45uCs9ukCMUL8Usi2r0i3rVigL73UJ3Q&callback=initMap"></script>
+
+                                          <script>
+                                          function initMap() {
+                                            var uluru = {lat: 40.202033, lng: 44.518471};
+                                            var map = new google.maps.Map(document.getElementById('map_canvas'), {
+                                              zoom: 8,
+                                              center: uluru
+                                            });
+                                            myMarker = new google.maps.Marker({
+                                              position: uluru,
+                                              map: map,
+                                              draggable:true,
+                                            });
+
+                                            /*google.maps.event.addListener(myMarker, 'dragend', function(evt){
+                                            document.getElementById('map_canvas').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
+                                          });*/
+                                          $(document).ready(function() {
+                                            google.maps.event.addListener(map, "idle", function(){
+                                              google.maps.event.trigger(map, 'resize');
+                                            });
+                                          });
+
+                                        }
+                                      </script>
+
+
+                                      <script>
+                                      // Initialize Firebase
+                                      var config = {
+                                        apiKey: "AIzaSyBY9EFiVrxbNRbZdNxQB2F4rzPuIuVlH_I",
+                                        authDomain: "store-491ea.firebaseapp.com",
+                                        databaseURL: "https://store-491ea.firebaseio.com",
+                                        projectId: "store-491ea",
+                                        storageBucket: "store-491ea.appspot.com",
+                                        messagingSenderId: "718046674824"
+                                      };
+                                      firebase.initializeApp(config);
+                                    </script>
+                                    <script src="script.js"></script>
+                                  </body>
+                                  </html>
+                                  <!--
+                                  <select name="" id="">
+                                  <option value="lori 1"> lori 1</option>
+                                </select>-->
