@@ -142,6 +142,5 @@
 <div class="form-group col-md-3">
   <button type="button" id="save_mission" class="form-control" name="button">Save Mission</button>
 </div>
-<script type="text/javascript">
-</script>
+
 <?php require 'layouts/footer.php' ?>

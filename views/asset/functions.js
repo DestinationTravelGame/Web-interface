@@ -1,16 +1,18 @@
-// Initialize Firebase
-var config = {
-	apiKey: "AIzaSyBY9EFiVrxbNRbZdNxQB2F4rzPuIuVlH_I",
-	authDomain: "store-491ea.firebaseapp.com",
-	databaseURL: "https://store-491ea.firebaseio.com",
-	projectId: "store-491ea",
-	storageBucket: "store-491ea.appspot.com",
-	messagingSenderId: "718046674824"
-};
+
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyDXvXwAt0VoXPqR8szuBeXg1Zj-wYRNEvE",
+			authDomain: "temporal-works-161414.firebaseapp.com",
+			databaseURL: "https://temporal-works-161414.firebaseio.com",
+			projectId: "temporal-works-161414",
+			storageBucket: "temporal-works-161414.appspot.com",
+			messagingSenderId: "470743733083"
+		};
+		firebase.initializeApp(config);
 
 var infoWindows = [];
 
-firebase.initializeApp(config);
+
 // focus marker onChange location
 function findMyLocation(choosedLocation,type) {
 	if(type==1) {
@@ -229,7 +231,7 @@ function getValues(){
     });
 
   	var positions = myMarker.getPosition();
-		var id_part = positions.lat().toString().replace(".",",") + "" + positions.lng().toString().replace(".",",");
+		var id_part = positions.lat().toString().replace(".",",") + "&" + positions.lng().toString().replace(".",",");
 
 		// Make Object
     var fields = {
@@ -342,16 +344,21 @@ function get_checkpoints(map){
 					console.log(i);
 					var checkpoint_id_array = checkpointName.split('_');
 					var checkpointRef = firebaseRef.child("checkpoints");
-					for(let j = 0; j < checkpoint_id_array.length - 2; j++){
+					for(let j = 0; j < checkpoint_id_array.length - 1; j++){
 						checkpointRef = checkpointRef.child(checkpoint_id_array[j]);
 					}
+
 					checkpointRef = checkpointRef.child(checkpointName);
+					console.log("this is checkpoint ref");
+					console.log(checkpointRef);
+
+
 					checkpointRef.on("value", function(snapshot, i){
 						var currentCheckpointInfo = snapshot.val();
 
 						var uluru = {lat:currentCheckpointInfo.location[0], lng: currentCheckpointInfo.location[1]};
 
-						var contentString = currentCheckpointInfo.title.eng_title;
+						var contentString = currentCheckpointInfo.title.arm_title;
 
 						var infowindow = new google.maps.InfoWindow({
 		          content: contentString,
