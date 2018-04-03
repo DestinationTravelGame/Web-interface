@@ -231,7 +231,7 @@ function getValues(){
     });
 
   	var positions = myMarker.getPosition();
-		var id_part = positions.lat().toString().replace(".",",") + "&" + positions.lng().toString().replace(".",",");
+		var id_part = positions.lat().toString().replace(".",",") + "_" + positions.lng().toString().replace(".",",");
 
 		// Make Object
     var fields = {
@@ -244,11 +244,11 @@ function getValues(){
     	arm_desc: $("#arm_desc").val(),
     	rus_desc: $("#rus_desc").val(),
     	eng_desc: $("#eng_desc").val(),
-    	score: parseFloat($("#score").val()),
+    	score:  parseInt(parseFloat($("#score").val())),
     	marker_url: $("#marker_url").val(),
-    	marker_radius: $("#marker_radius").val(),
+    	marker_radius:  parseInt($("#marker_radius").val()),
     	difficulty: Number($("#difficulty").val()),
-    	type: point_type,
+    	type:  point_type,
     	id: $("#country").val().slice(0,3).toLowerCase() + "_" + $("#regions").val().slice(0,3).toLowerCase() + "_" + $("#cities").val().toLowerCase()	.slice(0,3) + "_" + id_part,
     	location_array: [positions.lat(), positions.lng()],
     }
@@ -342,9 +342,9 @@ function get_checkpoints(map){
 					console.log("this is checkpoint name");
 					console.log(checkpointName);
 					console.log(i);
-					var checkpoint_id_array = checkpointName.split('_');
+					var checkpoint_id_array = checkpointName.split('_')
 					var checkpointRef = firebaseRef.child("checkpoints");
-					for(let j = 0; j < checkpoint_id_array.length - 1; j++){
+					for(let j = 0; j < checkpoint_id_array.length - 2; j++){
 						checkpointRef = checkpointRef.child(checkpoint_id_array[j]);
 					}
 
