@@ -30,6 +30,9 @@ body{
 	display: flex;
 	background: linear-gradient(30deg, #ff6268 50%, #fea342  100%);
 }
+#autocomplete {
+        width: 100%;
+      }
 .buttons{
 	display: table;
 	margin: auto;

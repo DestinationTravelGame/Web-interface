@@ -16,6 +16,8 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">
       <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js" integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
       <script src="../web-interface/views/asset/functions.js"></script>
+      <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBW70tI05G-W21b-Tt9JXHyBDCmPugz-38&libraries=places"> -->
+
 
    </head>
    <body>
