@@ -3,6 +3,10 @@ body{
 	 min-width: 410px;
 	 /*background: linear-gradient(to top, #fff 50%,#2989d8 50%);*/
 }
+#infowindow-content {
+        display: inline;
+      }
+
 .header_fixed{
 	min-width: 410px;
 }

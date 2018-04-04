@@ -175,7 +175,7 @@ function remove_file(d){
 function remove_checkpoint(d){
   $.confirm({
       title: 'Confirm!',
-      content: 'Are you sure for delete!',
+      content: 'Are you sure you want to delete?',
       buttons: {
         confirm: function () {
 
