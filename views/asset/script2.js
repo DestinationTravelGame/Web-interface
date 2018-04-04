@@ -1,11 +1,4 @@
-
-
-
-
-
-
-
-$("#question_type").on("change", function(){
+("#question_type").on("change", function(){
   var quest_type = $(this).val();
   $(".question-type-field div").removeClass("display_block");
   switch(quest_type){

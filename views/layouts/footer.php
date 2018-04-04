@@ -38,10 +38,19 @@
                 google.maps.event.addListener(map, "idle", function() {
                     google.maps.event.trigger(map, 'resize');
                 });
+                if (myMarker) {
+                    myMarker.addListener('dragend', function() {
+                        // auto_fill_reset(); this is commented because it is not the right function
+                        myMarker.infowindow_place_search.close();
+                        console.log("info window removed");
+                    });
+                }
+
             });
-            google.maps.event.addListener(map, 'click', function(event) {
-                myMarker.setPosition(event.latLng);
-            });
+            //I think this is not so usefull for now
+            // google.maps.event.addListener(map, 'click', function(event) {
+            //     myMarker.setPosition(event.latLng);
+            // });
         }
 
         // This part is again for places api
@@ -53,12 +62,13 @@
             });
         autocomplete.bindTo('bounds', map);
         places = new google.maps.places.PlacesService(map);
-        var infowindow = new google.maps.InfoWindow();
+        myMarker.infowindow_place_search = new google.maps.InfoWindow();
+        // var infowindow_place_search = new google.maps.InfoWindow();
         var infowindowContent = document.getElementById('infowindow-content');
-        infowindow.setContent(infowindowContent);
+        myMarker.infowindow_place_search.setContent(infowindowContent);
         autocomplete.addListener('place_changed', function() {
 
-            infowindow.close();
+            myMarker.infowindow_place_search.close();
             var place = autocomplete.getPlace();
             if (!place.geometry) {
                 // User entered the name of a Place that was not suggested and
@@ -95,13 +105,13 @@
             infowindowContent.children['place-icon'].src = place.icon;
             infowindowContent.children['place-name'].textContent = place.name;
             infowindowContent.children['place-address'].textContent = address;
-            infowindow.open(map, myMarker);
+            myMarker.infowindow_place_search.open(map, myMarker);
 
             //This part is responsible for changing the selected country
             for (i = 0; i < place.address_components.length; i++) {
                 if (place.address_components[i].types[0] == 'country' && place.address_components[i].long_name == 'Armenia') {
                     $("#country").val("Armenia");
-                    console.log('the coutry is found and set');
+                    console.log('the country is found and set');
                     var country_is_set = true
                     break;
                 } else {
@@ -113,20 +123,20 @@
             }
             //This part is responsible for changing the selected region
             if (country_is_set) {
-              //Fill in the regions as select select Options
-              for (var i = 0; i < ArmRegions.length; i++){
-            		$("#country").parent().next().next().find(".region_select").append("<option value="+ArmRegions[i]+">"+ArmRegions[i]+"</option>");
-                console.log(ArmRegions[i]);
-                console.log("successfully added region "+ArmRegions[i]);
-            	}
-              //Find info about region and select it
+                //Fill in the regions as select select Options
+                for (var i = 0; i < ArmRegions.length; i++) {
+                    $("#country").parent().next().next().find(".region_select").append("<option value=" + ArmRegions[i] + ">" + ArmRegions[i] + "</option>");
+                    console.log(ArmRegions[i]);
+                    console.log("successfully added region " + ArmRegions[i]);
+                }
+                //Find info about region and select it
                 for (i = 0; i < place.address_components.length; i++) {
-                  if (region_is_set) {
-                    break;
-                  }
+                    if (region_is_set) {
+                        break;
+                    }
                     for (j = 0; j < ArmRegions.length; j++) {
                         if (place.address_components[i].types[0] == 'administrative_area_level_1' && place.address_components[i].long_name.includes(ArmRegions[j])) {
-                          console.log(ArmRegions[j]);
+                            console.log(ArmRegions[j]);
                             $("#regions").val(ArmRegions[j]);
                             console.log('the region is found and set');
                             var region_is_set = true
@@ -138,6 +148,17 @@
                     }
                 }
             }
+
+
+            if (region_is_set) {
+                console.log("This should be done tomorrow");
+            }
+
+
+
+
+
+
         });
     }
     // Map for missions
