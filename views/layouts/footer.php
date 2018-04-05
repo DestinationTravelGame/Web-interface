@@ -1,10 +1,6 @@
 <script src="../web-interface/views/asset/js/jsLibs/jquery-3.2.0.min.js"></script>
 <script src="../web-interface/views/asset/jsLibs/jquery.cookie.js"></script>
 <script src="../web-interface/views/asset/appJs/location.js"></script>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBW70tI05G-W21b-Tt9JXHyBDCmPugz-38"></script> -->
-
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwUKgZqS6GvhXfo-dt2Ewqmr9fIK7aw-w&libraries=places"></script> -->
-
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwUKgZqS6GvhXfo-dt2Ewqmr9fIK7aw-w&libraries=places&callback=initMap" async defer></script>
 
 <script>
@@ -53,7 +49,7 @@
             // });
         }
 
-        // This part is again for places api
+        // This part is again for places api autocomplete functionality implementation
         autocomplete = new google.maps.places.Autocomplete(
             /** @type {!HTMLInputElement} */
             (
@@ -63,11 +59,9 @@
         autocomplete.bindTo('bounds', map);
         places = new google.maps.places.PlacesService(map);
         myMarker.infowindow_place_search = new google.maps.InfoWindow();
-        // var infowindow_place_search = new google.maps.InfoWindow();
         var infowindowContent = document.getElementById('infowindow-content');
         myMarker.infowindow_place_search.setContent(infowindowContent);
         autocomplete.addListener('place_changed', function() {
-
             myMarker.infowindow_place_search.close();
             var place = autocomplete.getPlace();
             if (!place.geometry) {
@@ -92,9 +86,9 @@
                 document.getElementById('autocomplete').placeholder = 'Enter the name of a place';
             }
 
+            //This part is responsible for filling the info window
             var address = '';
             if (place.address_components) {
-                //This part is responsible for filling the info window
                 address = [
                     (place.address_components[0] && place.address_components[0].short_name || ''),
                     (place.address_components[1] && place.address_components[1].short_name || ''),
@@ -116,8 +110,6 @@
                     break;
                 } else {
                     console.log('this is not a country name');
-                    //Not sure if this alwas gives the country name
-
                     $("#country").val("defval");
                 }
             }
@@ -142,23 +134,29 @@
                             var region_is_set = true
                             break;
                         } else {
-                            console.log('this is not a region name')
+                            console.log('this is not a region')
                             // $("#region").val("defval");
                         }
                     }
                 }
             }
-
-
+            //Now search for the city name in the place data from google, if found set it in the city selector
             if (region_is_set) {
-                console.log("This should be done tomorrow");
+                var array_of_cities = eval($("#regions").val());
+                console.log("This is regions value");
+                console.log($("#regions").val());
+                console.log("This is the array of cities of the chosen region");
+                console.log(array_of_cities);
+                for (i = 0; i < array_of_cities.length; i++) {
+                    if (place.address_components[i].types[0] == 'locality' && place.address_components[i].long_name == array_of_cities[i]) {
+                        $("#cities").val(array_of_cities[i]);
+                        console.log("The city is found and set");
+                        console.log();
+                    } else {
+                        console.log("This is not a city, searching in the next address component");
+                    }
+                }
             }
-
-
-
-
-
-
         });
     }
     // Map for missions
