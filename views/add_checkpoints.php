@@ -100,8 +100,7 @@
                                 <h4>Marker Radius</h4>
                                 <input type="number" id="marker_radius" value="50" onfocusout="draw_circle();" name="marker_radius" class="form-control">
                             </div>
-                            <h4>Change Location</h4>
-
+                            <h4>Type the name of the place or drag the marker to the place</h4>
                             <div id="locationField">
                                 <input id="autocomplete" placeholder="Enter the name of a place" type="text" />
                             </div>

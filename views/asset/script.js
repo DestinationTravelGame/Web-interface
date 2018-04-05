@@ -10,6 +10,7 @@ const Ararat = ['Artashat', 'Ararat', 'Vedi', 'Masis']
 const Aragatsotn = ['Ashtarak', 'Aparan', 'Talin']
 const Vayots_Dzor = ['Yeghegnadzor', 'Vayq', 'Jermuk', ]
 const Syunik = ['Kapan', 'Goris', 'Qajaran', 'Sisian', 'Megri', 'Dastakert']
+const Yerevan = ['Yerevan']
 // End Locations
 
 $('.country_select').on('change', function() {
@@ -100,9 +101,14 @@ $('.region_select').on('change', function() {
             city = Syunik;
             fillCities(city)
             break;
+        case 'Yerevan':
+            city = Yerevan;
+            fillCities(city)
+            break;
         case 'defval':
             $(".city_select option").remove();
             $(".city_select").append("<option value='defval' selected='selected'>City</option>");
+            findMyLocation($(".country_select").val(), 1)
             break;
         default:
             $.alert({
@@ -124,26 +130,20 @@ function fillCities(city) {
     }
 }
 
-// $(".region_select").change(function(){
-// 	var regdef = $( this ).val();
-// 	if (regdef == "defval") {
-// 		$( ".city_select option" ).remove();
-//
-// 	}
-// })
-
-// End choose a region
-
 // Choose a city in <<add new checkpoint>> section
 $('.city_select').on('change', function() {
     //Get the name of chosen city
     var city = $(".city_select").val();
-
-    // Find country location using predefined function
-    if ($(this).data('type') == 'add_checkpoint') {
-        findMyLocation(city, 3);
+    switch (city) {
+        case 'defval':
+            findMyLocation($(".region_select").val(), 2)
+            break;
+        default:
+            // Find city location using predefined function
+            if ($(this).data('type') == 'add_checkpoint') {
+                findMyLocation(city, 3);
+            }
     }
-
 });
 
 // File Transfer

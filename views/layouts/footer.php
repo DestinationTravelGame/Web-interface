@@ -57,7 +57,7 @@
                 //types: ['(cities)']
             });
         autocomplete.bindTo('bounds', map);
-        places = new google.maps.places.PlacesService(map);
+        // places = new google.maps.places.PlacesService(map);
         myMarker.infowindow_place_search = new google.maps.InfoWindow();
         var infowindowContent = document.getElementById('infowindow-content');
         myMarker.infowindow_place_search.setContent(infowindowContent);
@@ -115,7 +115,13 @@
             }
             //This part is responsible for changing the selected region
             if (country_is_set) {
-                //Fill in the regions as select select Options
+                // First clear the lower branches (regions and cities)
+                $(".region_select option").remove();
+                $(".city_select option").remove();
+                // Then set them to default values
+                $(".region_select").append("<option value='defval' selected='selected'>Region</option>");
+                $(".city_select").append("<option value='defval' selected='selected'>City</option>");
+                //Fill in the regions as select options
                 for (var i = 0; i < ArmRegions.length; i++) {
                     $("#country").parent().next().next().find(".region_select").append("<option value=" + ArmRegions[i] + ">" + ArmRegions[i] + "</option>");
                     console.log(ArmRegions[i]);
@@ -142,18 +148,36 @@
             }
             //Now search for the city name in the place data from google, if found set it in the city selector
             if (region_is_set) {
+                // First clear the lower branch (cities)
+                $(".city_select option").remove();
+                // Then set it to the default value
+                $(".city_select").append("<option value='defval' selected='selected'>City</option>");
+                //Get cities of the selected region
                 var array_of_cities = eval($("#regions").val());
                 console.log("This is regions value");
                 console.log($("#regions").val());
                 console.log("This is the array of cities of the chosen region");
                 console.log(array_of_cities);
-                for (i = 0; i < array_of_cities.length; i++) {
-                    if (place.address_components[i].types[0] == 'locality' && place.address_components[i].long_name == array_of_cities[i]) {
-                        $("#cities").val(array_of_cities[i]);
-                        console.log("The city is found and set");
-                        console.log();
-                    } else {
-                        console.log("This is not a city, searching in the next address component");
+                //Fill in the regions as select options
+                for (var i = 0; i < array_of_cities.length; i++) {
+                    $("#country").parent().next().next().next().next().find(".city_select").append("<option value=" + array_of_cities[i] + ">" + array_of_cities[i] + "</option>");
+                    console.log(array_of_cities[i]);
+                    console.log("successfully added city " + array_of_cities[i]);
+                }
+                for (i = 0; i < place.address_components.length; i++) {
+                    if (city_is_set) {
+                        break;
+                    }
+                    for (j = 0; j < array_of_cities.length; j++) {
+                        if (place.address_components[i].types[0] == 'locality' && place.address_components[i].long_name == array_of_cities[j]) {
+                            $("#cities").val(array_of_cities[j]);
+                            console.log("The city is found and set");
+                            console.log(array_of_cities[j]);
+                            var city_is_set = true
+                            break;
+                        } else {
+                            console.log("This is not a city, searching in the next address component");
+                        }
                     }
                 }
             }
