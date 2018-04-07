@@ -56,44 +56,44 @@
                             </div>
 
 
+                            <form id="second_part">
+                                <div class="countainer">
 
-                            <div class="countainer">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#arm_inputs">Arm</a></li>
+                                        <li><a data-toggle="tab" href="#rus_inputs">Rus</a></li>
+                                        <li><a data-toggle="tab" href="#eng_inputs">Eng</a></li>
+                                    </ul>
 
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#arm_inputs">Arm</a></li>
-                                    <li><a data-toggle="tab" href="#rus_inputs">Rus</a></li>
-                                    <li><a data-toggle="tab" href="#eng_inputs">Eng</a></li>
-                                </ul>
+                                    <div class="tab-content">
+                                        <div id="arm_inputs" class="tab-pane fade in active title_desc">
 
-                                <div class="tab-content">
-                                    <div id="arm_inputs" class="tab-pane fade in active title_desc">
-
-                                        <div class="form-group">
-                                            <input class="form-control" type="text" id="arm_title" placeholder="Վերնագիր">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" id="arm_title" placeholder="Վերնագիր">
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea name="" id="arm_desc" placeholder="Նկարագրություն" class="form-control" cols="30" rows="10"></textarea>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <textarea name="" id="arm_desc" placeholder="Նկարագրություն" class="form-control" cols="30" rows="10"></textarea>
+                                        <div id="rus_inputs" class="tab-pane fade title_desc">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" id="rus_title" placeholder="Заголовок">
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea name="" id="rus_desc" placeholder="Описание" class="form-control" cols="30" rows="10"></textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div id="rus_inputs" class="tab-pane fade title_desc">
-                                        <div class="form-group">
-                                            <input class="form-control" type="text" id="rus_title" placeholder="Заголовок">
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea name="" id="rus_desc" placeholder="Описание" class="form-control" cols="30" rows="10"></textarea>
-                                        </div>
-                                    </div>
-                                    <div id="eng_inputs" class="tab-pane fade title_desc">
-                                        <div class="form-group">
-                                            <input class="form-control" type="text" id="eng_title" placeholder="Title">
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea name="" id="eng_desc" placeholder="Description" class="form-control" cols="30" rows="10"></textarea>
+                                        <div id="eng_inputs" class="tab-pane fade title_desc">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" id="eng_title" placeholder="Title">
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea name="" id="eng_desc" placeholder="Description" class="form-control" cols="30" rows="10"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
+                            </form>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -249,26 +249,8 @@
                                               <option selected="selected" value="defval">City</option>
                                             </select>
                     </div>
-
-
-
-
-
-
                 </div>
-                <!-- <table class="table table-bordered" id="get_all_checkpoints">
-                                        <thead>
-                                        <tr>
-                                        <th>N</th>
-                                        <th>Title</th>
-                                        <th>Description</th>
-                                        <th>#</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody id="check">
 
-                                  </tbody>
-                                </table> -->
                 <div id="check" class="container-fluid">
 
                 </div>

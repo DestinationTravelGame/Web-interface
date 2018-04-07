@@ -105,11 +105,11 @@
             for (i = 0; i < place.address_components.length; i++) {
                 if (place.address_components[i].types[0] == 'country' && place.address_components[i].long_name == 'Armenia') {
                     $("#country").val("Armenia");
-                    console.log('the country is found and set');
+                    // console.log('the country is found and set');
                     var country_is_set = true
                     break;
                 } else {
-                    console.log('this is not a country name');
+                    // console.log('this is not a country name');
                     $("#country").val("defval");
                 }
             }
@@ -124,8 +124,8 @@
                 //Fill in the regions as select options
                 for (var i = 0; i < ArmRegions.length; i++) {
                     $("#country").parent().next().next().find(".region_select").append("<option value=" + ArmRegions[i] + ">" + ArmRegions[i] + "</option>");
-                    console.log(ArmRegions[i]);
-                    console.log("successfully added region " + ArmRegions[i]);
+                    // console.log(ArmRegions[i]);
+                    // console.log("successfully added region " + ArmRegions[i]);
                 }
                 //Find info about region and select it
                 for (i = 0; i < place.address_components.length; i++) {
@@ -134,13 +134,13 @@
                     }
                     for (j = 0; j < ArmRegions.length; j++) {
                         if (place.address_components[i].types[0] == 'administrative_area_level_1' && place.address_components[i].long_name.includes(ArmRegions[j])) {
-                            console.log(ArmRegions[j]);
+                            // console.log(ArmRegions[j]);
                             $("#regions").val(ArmRegions[j]);
-                            console.log('the region is found and set');
+                            // console.log('the region is found and set');
                             var region_is_set = true
                             break;
                         } else {
-                            console.log('this is not a region')
+                            // console.log('this is not a region')
                             // $("#region").val("defval");
                         }
                     }
@@ -154,15 +154,15 @@
                 $(".city_select").append("<option value='defval' selected='selected'>City</option>");
                 //Get cities of the selected region
                 var array_of_cities = eval($("#regions").val());
-                console.log("This is regions value");
-                console.log($("#regions").val());
-                console.log("This is the array of cities of the chosen region");
-                console.log(array_of_cities);
-                //Fill in the regions as select options
+                // console.log("This is regions value");
+                // console.log($("#regions").val());
+                // console.log("This is the array of cities of the chosen region");
+                // console.log(array_of_cities);
+                //Fill in the cities as select options
                 for (var i = 0; i < array_of_cities.length; i++) {
                     $("#country").parent().next().next().next().next().find(".city_select").append("<option value=" + array_of_cities[i] + ">" + array_of_cities[i] + "</option>");
-                    console.log(array_of_cities[i]);
-                    console.log("successfully added city " + array_of_cities[i]);
+                    // console.log(array_of_cities[i]);
+                    // console.log("successfully added city " + array_of_cities[i]);
                 }
                 for (i = 0; i < place.address_components.length; i++) {
                     if (city_is_set) {
@@ -171,15 +171,23 @@
                     for (j = 0; j < array_of_cities.length; j++) {
                         if (place.address_components[i].types[0] == 'locality' && place.address_components[i].long_name == array_of_cities[j]) {
                             $("#cities").val(array_of_cities[j]);
-                            console.log("The city is found and set");
-                            console.log(array_of_cities[j]);
+                            // console.log("The city is found and set");
+                            // console.log(array_of_cities[j]);
                             var city_is_set = true
                             break;
                         } else {
-                            console.log("This is not a city, searching in the next address component");
+                            // console.log("This is not a city, searching in the next address component");
                         }
                     }
                 }
+            }
+            //Now set the name of the place to the title field (for now in all languages)
+            if (place.name) {
+                $("#eng_title").val(place.name);
+                $("#rus_title").val(place.name);
+                $("#arm_title").val(place.name);
+            } else {
+                console.log("There is no name for this place in google places databases");
             }
         });
     }
@@ -209,16 +217,10 @@
     }
 
     $(window).ready(function() {
-        if (document.getElementById('map') != null) {
-            console.log('The map will hopefully be rendered after callback of places api');
-        } else {
-            console.log("There is no map for checkpoints");
-        }
-
         if (document.getElementById('map_for_missions') != null) {
             initMapMissions();
         } else {
-            console.log("There is no map for missions");
+            // console.log("There is no map for missions");
         }
     });
 </script>

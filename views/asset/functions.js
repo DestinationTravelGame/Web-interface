@@ -68,6 +68,12 @@ function auto_fill_reset() {
     $('#upload_pics > *').remove();
 }
 
+// AutoFill for testing(Reset)
+function reset_second_part() {
+	document.getElementById('second_part').reset();
+	// $("#second_part").reset();
+}
+
 // remove photos onReset
 function remove_add_checkpoint_photos() {
     $("#upload_pics > *").remove();
@@ -384,17 +390,12 @@ function get_checkpoints(map) {
                     mission_checkpoints_final[selected_checkpoint - 1] = this.id;
                     $('#checkpoint_title_' + selected_checkpoint).val(this.content);
                 });
-
             });
             // 	temporary_checkpoint_object = allCheckpointsInCity[checkpointName];
             // 	var temporary_title = temporary_checkpoint_object.title.eng_title;
             // 	var temporary_desc = temporary_checkpoint_object.description.eng_desc;
-
         }
-
-
     })
-
 }
 var num_checkpoints_in_mission = 0;
 var mission_checkpoints_final = [];

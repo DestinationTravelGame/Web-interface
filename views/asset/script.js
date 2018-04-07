@@ -14,12 +14,13 @@ const Yerevan = ['Yerevan']
 // End Locations
 
 $('.country_select').on('change', function() {
-    //$( ".country_select option" ).remove();
+    //If the city has changed we should reset all titles and descriptions
+    // reset_second_part();
+    //Remove marker info window
     if (myMarker) {
         myMarker.infowindow_place_search.close();
         console.log("info window removed");
     }
-
     var country = $(this).val();
     switch (country) {
         case 'Armenia':
@@ -50,6 +51,9 @@ $('.country_select').on('change', function() {
 
 // Choose a region in <<add new checkpoint>> section
 $('.region_select').on('change', function() {
+    //If the city has changed we should reset all titles and descriptions
+    // reset_second_part();
+    //Remove marker info window
     if (myMarker) {
         myMarker.infowindow_place_search.close();
         console.log("info window removed");
@@ -132,6 +136,13 @@ function fillCities(city) {
 
 // Choose a city in <<add new checkpoint>> section
 $('.city_select').on('change', function() {
+    //If the city has changed we should reset all titles and descriptions
+    // reset_second_part();
+    //Remove marker info window
+    if (myMarker) {
+        myMarker.infowindow_place_search.close();
+        console.log("info window removed");
+    }
     //Get the name of chosen city
     var city = $(".city_select").val();
     switch (city) {
