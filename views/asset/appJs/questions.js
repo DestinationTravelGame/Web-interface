@@ -84,12 +84,12 @@ $("#save_data_1").on("click", function() {
         return;
     }
     var question_id = "mul_one_true&" + newQuestionKey;
-    firebaseRef.child("questions").child("mul_one_true").child(question_id + "/question_text/rus").set(rus_text_type_1);
-    firebaseRef.child("questions").child("mul_one_true").child(question_id + "/question_text/arm").set(arm_text_type_1);
-    firebaseRef.child("questions").child("mul_one_true").child(question_id + "/question_text/eng").set(eng_text_type_1);
-    firebaseRef.child("questions").child("mul_one_true").child(question_id + "/answers/true_answer/arm").set(arm_answer_true);
-    firebaseRef.child("questions").child("mul_one_true").child(question_id + "/answers/true_answer/rus").set(rus_answer_true);
-    firebaseRef.child("questions").child("mul_one_true").child(question_id + "/answers/true_answer/eng").set(eng_answer_true);
+    firebase.database().ref().child("questions").child("mul_one_true").child(question_id + "/question_text/arm").set(arm_text_type_1);
+    firebase.database().ref().child("questions").child("mul_one_true").child(question_id + "/question_text/eng").set(eng_text_type_1);
+    firebase.database().ref().child("questions").child("mul_one_true").child(question_id + "/question_text/rus").set(rus_text_type_1);
+    firebase.database().ref().child("questions").child("mul_one_true").child(question_id + "/answers/true_answer/arm").set(arm_answer_true);
+    firebase.database().ref().child("questions").child("mul_one_true").child(question_id + "/answers/true_answer/rus").set(rus_answer_true);
+    firebase.database().ref().child("questions").child("mul_one_true").child(question_id + "/answers/true_answer/eng").set(eng_answer_true);
 
     for (var i = 0; i < type_1_answer_id; i++) {
 
@@ -105,9 +105,9 @@ $("#save_data_1").on("click", function() {
             });
             return;
         }
-        firebaseRef.child("questions").child("mul_one_true").child(question_id + "/answers/false_answer/" + i + "/arm").set(arm_answer_type_1);
-        firebaseRef.child("questions").child("mul_one_true").child(question_id + "/answers/false_answer/" + i + "/rus").set(rus_answer_type_1);
-        firebaseRef.child("questions").child("mul_one_true").child(question_id + "/answers/false_answer/" + i + "/eng").set(eng_answer_type_1);
+        firebase.database().ref().child("questions").child("mul_one_true").child(question_id + "/answers/false_answer/" + i + "/arm").set(arm_answer_type_1);
+        firebase.database().ref().child("questions").child("mul_one_true").child(question_id + "/answers/false_answer/" + i + "/rus").set(rus_answer_type_1);
+        firebase.database().ref().child("questions").child("mul_one_true").child(question_id + "/answers/false_answer/" + i + "/eng").set(eng_answer_type_1);
     }
     //Also add the question ID under the selected checkpoint
     get_selected_checkpoint_path().set(question_id);
@@ -178,9 +178,9 @@ $("#save_data_2").on("click", function() {
 
 
 
-    firebaseRef.child("questions").child("man_cor_true").child(question_id_type2 + "/question_text/arm").set(arm_text_type_2);
-    firebaseRef.child("questions").child("man_cor_true").child(question_id_type2 + "/question_text/rus").set(rus_text_type_2);
-    firebaseRef.child("questions").child("man_cor_true").child(question_id_type2 + "/question_text/eng").set(eng_text_type_2);
+    firebase.database().ref().child("questions").child("man_cor_true").child(question_id_type2 + "/question_text/arm").set(arm_text_type_2);
+    firebase.database().ref().child("questions").child("man_cor_true").child(question_id_type2 + "/question_text/rus").set(rus_text_type_2);
+    firebase.database().ref().child("questions").child("man_cor_true").child(question_id_type2 + "/question_text/eng").set(eng_text_type_2);
 
     //end insert question text
 
@@ -205,9 +205,9 @@ $("#save_data_2").on("click", function() {
             });
             return;
         }
-        firebaseRef.child("questions").child("man_cor_true").child(question_id_type2 + "/answers/true_answers/" + i + "/arm").set(arm_answer_true);
-        firebaseRef.child("questions").child("man_cor_true").child(question_id_type2 + "/answers/true_answers/" + i + "/rus").set(rus_answer_true);
-        firebaseRef.child("questions").child("man_cor_true").child(question_id_type2 + "/answers/true_answers/" + i + "/eng").set(eng_answer_true);
+        firebase.database().ref().child("questions").child("man_cor_true").child(question_id_type2 + "/answers/true_answers/" + i + "/rus").set(rus_answer_true);
+        firebase.database().ref().child("questions").child("man_cor_true").child(question_id_type2 + "/answers/true_answers/" + i + "/arm").set(arm_answer_true);
+        firebase.database().ref().child("questions").child("man_cor_true").child(question_id_type2 + "/answers/true_answers/" + i + "/eng").set(eng_answer_true);
     }
 
     // Insert false answers
@@ -233,9 +233,9 @@ $("#save_data_2").on("click", function() {
             });
             return;
         }
-        firebaseRef.child("questions").child("man_cor_true").child(question_id_type2 + "/answers/false_answers/" + i + "/arm").set(arm_answer_type_2);
-        firebaseRef.child("questions").child("man_cor_true").child(question_id_type2 + "/answers/false_answers/" + i + "/rus").set(rus_answer_type_2);
-        firebaseRef.child("questions").child("man_cor_true").child(question_id_type2 + "/answers/false_answers/" + i + "/eng").set(eng_answer_type_2);
+        firebase.database().ref().child("questions").child("man_cor_true").child(question_id_type2 + "/answers/false_answers/" + i + "/arm").set(arm_answer_type_2);
+        firebase.database().ref().child("questions").child("man_cor_true").child(question_id_type2 + "/answers/false_answers/" + i + "/rus").set(rus_answer_type_2);
+        firebase.database().ref().child("questions").child("man_cor_true").child(question_id_type2 + "/answers/false_answers/" + i + "/eng").set(eng_answer_type_2);
     }
 get_selected_checkpoint_path().set(question_id_type2);
     $.alert({
@@ -258,7 +258,7 @@ $('.diff_origin_photo_add_photo').on('click', function(e) {
     var posYtoPercent = posY / $("#draggable").parent().width() * 100;
     var QuestionId = 'sel_diff&' + firebase.database().ref().push().key;
     var ring_radius = (($("#draggable").width() / 2) / $("#draggable").parent().width()) * 100;
-    var checkpointRef = firebaseRef.child("checkpoints/" + $('#country2').val().slice(0, 3).toLowerCase() + '/' + $('#regions2').val().slice(0, 3).toLowerCase() + "/" + $('#cities2').val().slice(0, 3).toLowerCase() + '/' + $('#get_current_checkpoint_id').val());
+    var checkpointRef = firebase.database().ref().child("checkpoints/" + $('#country2').val().slice(0, 3).toLowerCase() + '/' + $('#regions2').val().slice(0, 3).toLowerCase() + "/" + $('#cities2').val().slice(0, 3).toLowerCase() + '/' + $('#get_current_checkpoint_id').val());
     var questionPhoto = testButton.files[0];
     var json = {
         "change_point": {
@@ -267,11 +267,16 @@ $('.diff_origin_photo_add_photo').on('click', function(e) {
             "y": posYtoPercent,
         },
     }
-    firebaseRef = firebaseRef.child("questions/sel_diff/" + QuestionId);
+    firebaseRef = firebase.database().ref().child("questions/sel_diff/" + QuestionId);
     firebaseRef.set(json);
     storageRef = firebase.storage().ref('questions/sel_diff/' + QuestionId);
     storageRef.put(questionPhoto);
-    checkpointRef.child('questions').push().set(QuestionId);
+
+    get_selected_checkpoint_path().set(QuestionId);
+    $.alert({
+        title: 'Alert!',
+        content: 'Question added successfully !',
+    });
 })
 
 
@@ -293,7 +298,7 @@ function get_selected_checkpoint_path() {
     var selected_checkpoint_id = $('#get_current_checkpoint_id').val();
     selected_checkpoint_id = selected_checkpoint_id + "";
     var checkpoint_id_array = selected_checkpoint_id.split('_')
-    var checkpointRef = firebaseRef.child("checkpoints");
+    var checkpointRef = firebase.database().ref().child("checkpoints");
     for (let j = 0; j < checkpoint_id_array.length - 2; j++) {
         checkpointRef = checkpointRef.child(checkpoint_id_array[j]);
     }
