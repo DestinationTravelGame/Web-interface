@@ -17,9 +17,9 @@ $('.country_select').on('change', function() {
     //If the city has changed we should reset all titles and descriptions
     // reset_second_part();
     //Remove marker info window
-    if (myMarker) {
-        myMarker.infowindow_place_search.close();
-        console.log("info window removed");
+    if (typeof myMarker !== 'undefined') {
+      console.log("info window removed");
+      myMarker.infowindow_place_search.close();
     }
     var country = $(this).val();
     switch (country) {
@@ -54,7 +54,7 @@ $('.region_select').on('change', function() {
     //If the city has changed we should reset all titles and descriptions
     // reset_second_part();
     //Remove marker info window
-    if (myMarker) {
+    if (typeof myMarker !== 'undefined') {
         myMarker.infowindow_place_search.close();
         console.log("info window removed");
     } else {
@@ -139,7 +139,7 @@ $('.city_select').on('change', function() {
     //If the city has changed we should reset all titles and descriptions
     // reset_second_part();
     //Remove marker info window
-    if (myMarker) {
+    if (typeof myMarker !== 'undefined') {
         myMarker.infowindow_place_search.close();
         console.log("info window removed");
     }
