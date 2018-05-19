@@ -1,7 +1,7 @@
 <script src="../web-interface/views/asset/js/jsLibs/jquery-3.2.0.min.js"></script>
 <script src="../web-interface/views/asset/jsLibs/jquery.cookie.js"></script>
 <script src="../web-interface/views/asset/appJs/location.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwUKgZqS6GvhXfo-dt2Ewqmr9fIK7aw-w&libraries=places&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDt8J4gX_RjbvTFOFwIqDdmzYZvj7DyVA&libraries=places&callback=initMap"></script>
 
 <script>
     // Map for checkpoints and the rest is for places api
